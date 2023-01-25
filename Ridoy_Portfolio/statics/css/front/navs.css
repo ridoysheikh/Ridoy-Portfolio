@@ -1,3 +1,54 @@
-body{
-    
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+.rflex{
+    display: flex;
+}
+.rcolumn{
+   flex-direction: column;
+}
+.rrow{
+    flex-direction: row;
+}
+.rcenter{
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}
+.content{
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(24, 22, 22);
+}
+.main_nav{
+    background-color: rgba(6, 4, 34, 0.952);
+    height: 90vh;
+    width: 300px;
+    margin: 5vh 0 5vh 0;
+    position: fixed;
+    border-radius: 0 20px 20px 0;
+    left: -300px;
+    transition: left 1s ease-in-out;
+
+}
+.togle_btn{
+    height: 10vh;
+    width: 30px;
+    text-align: center;
+    background-image: linear-gradient(to right,rgba(6, 4, 34, 0.952),rgba(9, 3, 104, 0.952));
+    border-radius: 0 15px 15px 0;
+    position: fixed;
+    margin: 45vh 0 45vh 0;
+    left: 0px;
+    transition: left 1s ease-in-out;
+    color: azure;
+    cursor: pointer;
+}
+.material-symbols-outlined{
+    transform: rotateY(0deg);
+    transition: transform 1s ease-in-out;
 }

@@ -1,4 +1,5 @@
 from django.shortcuts import render
 
 def home(request):
-    return render(request, 'front/home.html',{})
+    title = "Home"
+    return render(request, 'front/home.html',context={'title': title})
