@@ -57,7 +57,7 @@
     transition: transform 1s ease-in-out;
 }
 .text{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Paprika', cursive;
     color: aqua;
     font-size: 30px;
     margin-left: 5px;
@@ -89,3 +89,26 @@
 .list_item:hover > .bar{
     width: 260px;
 }
+.loader{
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(183, 203, 241);
+    z-index: 20;
+    display: flex;
+    opacity: 1;
+    transition: opacity .3s linear;
+}
+.loader_icon{
+    height: 40px;
+    width: 40px;
+    border: 15px solid rgb(134, 76, 192);
+    border-top: 15px solid rgb(183, 203, 241);
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

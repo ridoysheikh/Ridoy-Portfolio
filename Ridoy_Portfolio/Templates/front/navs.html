@@ -10,10 +10,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Bungee+Inline&family=Cinzel:wght@400;500;600&family=DM+Serif+Display&family=Monoton&family=Paprika&family=Playfair+Display:wght@500&family=Poppins:wght@100;300;400;500&display=swap" rel="stylesheet">
-    <script src="{% static 'js/front/navs.js' %}"></script>
     <title>{{ title }}</title>
+    {% block head %}
+    {% endblock  %}
 </head>
 <body>
+    <div class="loader rflex rcenter rcolumn">
+        <div class="loader_icon"></div>
+        <div class="text">Please Wait</div>
+    </div>
     <div class="main_nav rflex rrow rcenter">
         <div class="nav_list">
             <div class="list_item">
@@ -34,7 +39,20 @@
         {% endblock  %}
     </div>
     <div class="float_btn">
-
+        
     </div>
 </body>
+<script src="{% static 'js/front/navs.js' %}"></script>
+<script>
+    setInterval(() => {
+        if (document.readyState ==="complete") {
+            document.querySelector(".loader").style.display = "none";
+            document.querySelector(".loader").style.opacity = "0";
+        } else {
+            document.querySelector(".loader").style.display = "flex";
+            document.querySelector(".loader").style.opacity = "1";
+
+        }
+    }, 10);
+</script>
 </html>

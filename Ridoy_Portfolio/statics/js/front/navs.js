@@ -9,6 +9,13 @@ function tooglenavs() {
         document.querySelector(".togle_btn").style.left = "0px";
         document.querySelector(".material-symbols-outlined").style.transform = "rotateY(0deg)";
 
-    }
+    };
     
-}
+};
+setInterval(() => {
+    if (document.readyState ==="complete") {
+        document.querySelector(".loader").style.display = "none";
+    } else {
+        document.querySelector(".loader").style.display = "flex";
+    }
+}, 10);
