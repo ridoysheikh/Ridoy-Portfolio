@@ -10,49 +10,46 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Bungee+Inline&family=Cinzel:wght@400;500;600&family=DM+Serif+Display&family=Monoton&family=Paprika&family=Playfair+Display:wght@500&family=Poppins:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <script src="{% static 'js/front/navs.js' %}"></script>
     <title>{{ title }}</title>
     {% block head %}
     {% endblock  %}
 </head>
 <body>
+    <!--Logo start-->
     <div class="loader rflex rcenter rcolumn">
         <div class="loader_icon"></div>
         <div class="text">Please Wait</div>
     </div>
+    <a href="" class="logo rflex rrow rcenter">
+        <img src="https://i.postimg.cc/QttQChNt/IMG-4707-copy.png" alt="" class="logo_img">
+        <div class="logo_text">hello world</div>
+    </a>
+    <!--Logo end-->
+    
+    <!--Side Nav start-->
     <div class="main_nav rflex rrow rcenter">
         <div class="nav_list">
-            <div class="list_item">
+            <div class="list_item rflex rrow">
                 <div class="bar"></div>
-                <p class="text">Home</p>
+                <img src="https://logodix.com/logo/1931259.png"alt="">
+                <a href="/" class="text">Home</a>
             </div>
-            <div class="list_item">
+            <div class="list_item rflex rrow">
                 <div class="bar"></div>
-                <p class="text">Home</p>
+                <img src="https://logodix.com/logo/1931259.png"alt="">
+                <a href="/" class="text">Home</a>
             </div>
         </div>
     </div>
     <div class="togle_btn rflex rrow rcenter" onclick="tooglenavs()"><span class="material-symbols-outlined">
         double_arrow
         </span></div>
-    <div class="content">
+    <!--side Nav end-->
+    
+    <!-- Main Content Start-->
         {% block front %}
         {% endblock  %}
-    </div>
-    <div class="float_btn">
-        
-    </div>
+    <!-- Main Content Start-->
 </body>
-<script src="{% static 'js/front/navs.js' %}"></script>
-<script>
-    setInterval(() => {
-        if (document.readyState ==="complete") {
-            document.querySelector(".loader").style.display = "none";
-            document.querySelector(".loader").style.opacity = "0";
-        } else {
-            document.querySelector(".loader").style.display = "flex";
-            document.querySelector(".loader").style.opacity = "1";
-
-        }
-    }, 10);
-</script>
 </html>

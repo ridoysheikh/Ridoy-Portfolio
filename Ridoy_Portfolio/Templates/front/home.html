@@ -1,1 +1,37 @@
 {% extends 'front/navs.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/front/home.css' %}">
+<style>
+</style>
+{% endblock  %}
+{% block front %}
+<!--BG Wrapper-->
+<div class="bg_container"></div>
+
+<!--Main Content-->
+<div class="main_container rflex rcolumn rcenter">
+    <div class="rflex rcolumn text_section">
+        <!--Topp Texts-->
+        <div class="marg helo_txt">Hello, I am</div>
+        <div class="mname marg">RIDOY SHEIKH</div>
+        <div class="rflex rrow">
+            <div class="profs marg" id="proff">Full Stack Web Devoloper</div>
+            <div class="marg vl"></div>
+        </div>
+        <!--All Social Links-->
+        <div class="rflex rrow social_link_tab">
+            <div class="sc_item">
+                <a href="/"><img class="sc_image" src="https://www.facebook.com/images/fb_icon_325x325.png" alt=""></a>
+            </div>
+            <div class="sc_item">
+                <a href="/"><img class="sc_image" src="https://www.facebook.com/images/fb_icon_325x325.png" alt=""></a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/front/main.js' %}"></script>
+
+{% endblock  %}
+
