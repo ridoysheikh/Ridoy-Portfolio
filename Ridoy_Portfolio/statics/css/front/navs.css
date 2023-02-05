@@ -63,11 +63,14 @@
     color: aqua;
     font-size: 25px;
     z-index: 10;
+    margin-left: 10px;
     transition: text-shadow .4s ease-in-out,margin-left .4s ease-in-out,color .4s ease-in-out;
 }
 .list_item:hover > .text{
     text-shadow: 0 0 20px #fff;
     color: rgb(216, 193, 162);
+    margin-left: 20px;
+
 }
 .nav_list{
     margin: 10px 10px 0px 30px;
@@ -86,12 +89,6 @@
     position: absolute;
     z-index: -10;
     transition: width .4s ease-in-out;
-}
-.list_item img{
-    height: 28px;
-    width: 28px;
-    margin: 10px;
-    transition: margin-left .4s ease-in-out;
 }
 .list_item:hover > .bar{
     width: 260px;

@@ -1,0 +1,39 @@
+{% extends 'front/navs.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/front/resume.css' %}">
+{% endblock  %}
+
+{% block front %}
+<!-- Main Container Start -->
+<div class="item_container rflex rcolumn">
+    <!--Education Start-->
+    <!--Section Title-->
+    <div class="res_tagline rflex rcenter">
+        <p class="tag_text">EDUCATION & EXPERICENCE</p>
+    </div>
+    <!-- Main Content Of -->
+    <div class="rflex rrow edu_wrapper">
+    <!--Item Containers Start-->
+    <div class="edu_container rflex rcolumn">
+        <p>My Education</p>
+       
+         <!-- single Item Containers Start-->
+            <div class="items_container rflex rcolumn">
+                <p class="cont_title">Bachelor in Bussiness Studies</p>
+                <div class="item_institute rflex rrow">
+                    <p>Matibhanga degree collage | &nbsp</p>
+                    <p>2019 - current</p>
+                </div>
+                <p class="cont_details">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque cupiditate illo, quia vel dolorem voluptates possimus rem distinctio quaerat quidem repellat animi, voluptatem, dicta quod corporis assumenda laborum delectus explicabo.</p>
+            </div>
+        <!-- single Item Containers end-->
+
+    </div>
+    <!--Item Containers end-->
+    </div>
+</div>
+
+<!-- Main Container end -->
+
+{% endblock  %}

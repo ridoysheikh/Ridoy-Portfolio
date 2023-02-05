@@ -1,0 +1,71 @@
+.item_container{
+    background-image: linear-gradient(to bottom, rgb(32,32,32), rgb(64,64,64));
+
+    height: calc(100vh - 100px);
+    width: 100%;
+    z-index: -1;
+    overflow-y: scroll;
+    padding-top: 100px;
+}
+.item_container::-webkit-scrollbar{
+    display: none;
+}
+.res_tagline{
+    padding: 20px;
+    background-color: rgba(56, 56, 56, 0.849);
+    margin: 0 10px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px 2px rgb(16,16,16);
+    
+}
+.tag_text{
+    font-size: 30px;
+    color: 	#FAEBD7;
+    font-family: 'DM Serif Display', serif;
+    letter-spacing: 2px;
+}
+.edu_wrapper{
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+.edu_container{
+    width: 40%;
+    min-width: 450px;
+    margin: 20px 0;
+    border: 1px solid red;
+    border-radius: 5px;
+    
+}
+.edu_container p{
+    margin: 15px 20px;
+    color: #F08080;
+    font-size: 40px;
+    font-weight: 800;
+}
+.items_container{
+    padding: 10px 0 10px 60px;
+    
+}
+.items_container p{
+    margin: 3px 0;
+}
+.items_container .cont_title{
+    color: azure;
+    font-size: 30px;
+}
+.item_institute{
+    align-items: center;
+}
+.item_institute p:nth-child(1){
+    font-size: 20px;
+    color: #cfcfc9;
+}
+.item_institute p:nth-child(2){
+    font-size: 15px;
+    color: #cfcfc9;
+}
+.items_container .cont_details{
+    font-size: 16px;
+    color: rgb(159, 168, 168);
+}

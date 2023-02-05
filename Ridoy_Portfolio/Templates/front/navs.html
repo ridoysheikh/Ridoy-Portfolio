@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/front/navs.css' %}">
+    <link rel="shortcut icon" href="" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Bungee+Inline&family=Cinzel:wght@400;500;600&family=DM+Serif+Display&family=Monoton&family=Paprika&family=Playfair+Display:wght@500&family=Poppins:wght@100;300;400;500&display=swap" rel="stylesheet">
     <script src="{% static 'js/front/navs.js' %}"></script>
-    <title>{{ title }}</title>
+    <title>||{{ title }}</title>
     {% block head %}
     {% endblock  %}
 </head>
@@ -21,24 +22,26 @@
         <div class="loader_icon"></div>
         <div class="text">Please Wait</div>
     </div>
-    <a href="" class="logo rflex rrow rcenter">
+    <a href="{% url 'home' %}" class="logo rflex rrow rcenter">
         <img src="https://i.postimg.cc/QttQChNt/IMG-4707-copy.png" alt="" class="logo_img">
-        <div class="logo_text">hello world</div>
+        <div class="logo_text">Ridoy Sheikh</div>
     </a>
     <!--Logo end-->
     
     <!--Side Nav start-->
     <div class="main_nav rflex rrow rcenter">
-        <div class="nav_list">
+        <div class="nav_list rflex rcolumn">
             <div class="list_item rflex rrow">
                 <div class="bar"></div>
-                <img src="https://logodix.com/logo/1931259.png"alt="">
-                <a href="/" class="text">Home</a>
+                <a href="{% url 'home' %}" class="text"> <span class="material-symbols-outlined">
+                    home
+                    </span> Home</a>
             </div>
             <div class="list_item rflex rrow">
                 <div class="bar"></div>
-                <img src="https://logodix.com/logo/1931259.png"alt="">
-                <a href="/" class="text">Home</a>
+                <a href="{% url 'resume' %}" class="text"> <span class="material-symbols-outlined">
+                    school
+                    </span> Resume</a>
             </div>
         </div>
     </div>
