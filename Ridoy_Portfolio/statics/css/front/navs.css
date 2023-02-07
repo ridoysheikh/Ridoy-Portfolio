@@ -22,7 +22,7 @@
 }
 
 .main_nav{
-    background-color: rgba(6, 4, 34, 0.952);
+    background-color: rgba(64, 64, 64, 0.95);
     height: 90vh;
     width: 300px;
     margin: 5vh 0 5vh 0;
@@ -44,7 +44,7 @@
     height: 10vh;
     width: 30px;
     text-align: center;
-    background-image: linear-gradient(to right,rgba(2, 2, 10, 0.795),rgba(9, 3, 104, 0.952));
+    background-image: linear-gradient(to right,rgba(2, 2, 10, 0.795),rgba(64, 64, 64, 0.95));
     border-radius: 0 15px 15px 0;
     position: fixed;
     margin: 45vh 0 45vh 0;
@@ -52,11 +52,11 @@
     transition: left 1s ease-in-out;
     color: azure;
     cursor: pointer;
+    z-index: 9;
 }
-.material-symbols-outlined{
+.arrow{
     transform: rotateY(0deg);
     transition: transform 1s ease-in-out;
-    
 }
 .text{
     font-family: 'Cinzel', serif;
@@ -83,7 +83,7 @@
     align-items: center;
 }
 .list_item .bar{
-    background-color: rgb(28, 28, 37);
+    background-color: rgb(6, 4, 34);
     height: 35px ;
     width: 2px;
     position: absolute;
