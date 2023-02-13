@@ -7,3 +7,7 @@ def home(request):
 def resumes(request):
     title = "Resume"
     return render(request, 'front/resume.html',context={'title': title})
+
+def contact(request):
+    title = "Hire Me"
+    return render(request, 'front/contact.html',context={'title': title})

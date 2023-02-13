@@ -1,0 +1,38 @@
+{% extends 'front/navs.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/front/contact.css' %}">
+    <script src="{% static 'js/front/contact.js' %}"></script>
+{% endblock %}
+
+{% block front %}
+<div class="item_container rflex rrow">
+    <div class="form_cont rflex rcolumn">
+        <form>      
+            <input name="name" type="text" class="feedback-input" placeholder="Name" required/>   
+            <input name="email" type="text" class="feedback-input" placeholder="Email" required/>
+            <textarea name="text" class="feedback-input" placeholder="Massage" required></textarea>
+            <input type="submit" value="SUBMIT"/>
+          </form>
+    </div>
+    <div class="about_cont rflex rcolumn"> <ul class="contact-list">
+        <p class="greeting_text">Feel free to contact Me, I will be very happy to assist you!</p>
+
+        <li class="list-item"><span class="material-symbols-outlined">map</span>
+            <p class="contact-text">City, State</p></li>
+        
+        <li class="list-item"><span class="material-symbols-outlined">call</span>
+            <p class="contact-text"><a href="tel:1-212-555-5555" title="Give me a call">(212) 555-2368</a></p></li>
+        
+        
+        <li class="list-item"><span class="material-symbols-outlined">mail</span>
+            <p class="contact-text"><a href="mailto:#" title="Give me a call">ridoysheikh778@gmail.com</a></p></li>
+        
+        <li class="list-item"><span class="material-symbols-outlined">public</span>
+            <p class="contact-text"><a href="#" title="Give me a call">ridoysheikh.com</a></p></li>
+
+        
+      </ul>
+    </div>
+</div>
+{% endblock  %}
