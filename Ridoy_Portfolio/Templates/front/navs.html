@@ -2,11 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Seo Tags start-->
+    <meta name="description" content="{{ navs.seo_description }}"/>
+    <meta property="keywords" content="{{ navs.seo_keys }}"/>
+    <meta property="og:title" content="{{ navs.seo_title }}"/>
+    <meta property="og:description" content="{{ navs.seo_description }}"/>
+    <!--Seo Tags end-->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/front/navs.css' %}">
-    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="shortcut icon" href="/media/{{ navs.nv_logo }}" type="image/x-icon" height="50px" width="50px">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Bungee+Inline&family=Cinzel:wght@400;500;600&family=DM+Serif+Display&family=Monoton&family=Paprika&family=Play&family=Playfair+Display:wght@500&family=Poppins:wght@100;300;400;500&family=Roboto+Mono:wght@100;200&display=swap" rel="stylesheet">
     <script src="{% static 'js/front/navs.js' %}"></script>
-    <title>||{{ title }}</title>
+    <title>{{ navs.nv_title }} |{{ title }}</title>
     {% block head %}
     {% endblock  %}
 </head>
@@ -25,8 +31,8 @@
         <div class="text">Please Wait</div>
     </div>
     <a href="{% url 'home' %}" class="logo rflex rrow rcenter">
-        <img src="https://i.postimg.cc/QttQChNt/IMG-4707-copy.png" alt="" class="logo_img">
-        <div class="logo_text">Ridoy Sheikh</div>
+        <img src="/media/{{ navs.nv_logo }}" alt="" class="logo_img">
+        <div class="logo_text">{{ navs.nv_title }}</div>
     </a>
     <!--Logo end-->
     

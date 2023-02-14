@@ -1,0 +1,134 @@
+.item_container{
+    background-image: linear-gradient(to bottom, #09092a, #1b1b7e);
+    height: calc(100vh - 140px);
+    width: 100%;
+    z-index: -1;
+    overflow-y: scroll;
+    padding-top: 100px;
+    padding-bottom: 40px;
+}
+.item_container::-webkit-scrollbar{
+    display: none;
+}
+.res_tagline{
+    padding: 20px;
+    background-color: rgba(56, 56, 56, 0.849);
+    margin: 0 10px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px 2px rgb(16,16,16);
+}
+.tag_text{
+    font-size: 30px;
+    color: 	#FAEBD7;
+    font-family: 'DM Serif Display', serif;
+    letter-spacing: 2px;
+}
+.edu_wrapper{
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.edu_container{
+    width: 40%;
+    min-width: 450px;
+    margin: 20px 0;
+    border-radius: 10px;
+    background-color: rgba(56, 56, 56);
+    box-shadow: inset 0 0 50px 20px rgba(28, 28, 28),0 0 5px 2px rgba(28, 28, 28);
+    margin-left: -200px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out,margin-left 1s ease-in-out;
+}
+.edu_container p{
+    margin: 15px 20px;
+    color: #F08080;
+    font-size: 40px;
+    font-family: 'Playfair Display', serif;
+}
+.items_container{
+    padding: 10px 5px 10px 30px;
+    margin-left: 30px;
+    border-left: 5px solid beige;
+}
+.items_container p{
+    margin: 3px 0;
+    font-family: 'Play', sans-serif;
+}
+.items_container .cont_title{
+    color: azure;
+    font-size: 25px;
+}
+.item_institute{
+    align-items: center;
+}
+.item_institute p:nth-child(1){
+    font-size: 14px;
+    color: #cec9cf;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 200;
+    letter-spacing: .5px;
+}
+.item_institute p:nth-child(2){
+    font-size: 11px;
+    color: #f2e4f5;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 100;
+    letter-spacing: .5px;
+}
+.items_container .cont_details{
+    font-size: 14px;
+    color: rgb(179, 187, 187);
+    font-weight: 300;
+}
+.line-rodio{
+    margin: 7px 0 0 -45px;
+    border-radius: 50%;
+    color: #fff;
+}
+.items_container:hover > .hory_line .line-rodio {
+    box-shadow: 0 0 7px 0px #fff,inset 0 0 7px 0px #fff;
+}
+.sk_h{
+    justify-content: space-between;
+}
+.sk_h_tag{
+    font-size: 25px !important;
+    color: #fff !important;
+    font-family: 'Roboto Mono', monospace !important;
+
+}
+.sk_h_prog{
+    font-size: 15px !important;
+    color: #fff !important;
+    background-color: rgba(153, 62, 62, 0.842);
+    border-radius: 5px;
+    padding: 5px;
+}
+.items_container_sk{
+    padding: 15px;
+    margin: 10px 10px 20px 30px;
+    background-color: rgb(24,24,24);
+    box-shadow: inset 0 0 15px 1px rgb(36,36,36);
+    border-radius: 15px;
+}
+.progg_bg{
+    background-color: #09092a;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+}
+.progg_fr{
+    background-color: #d3d3dd;
+    height: 8px;
+    border-radius: 4px;
+}
+
+
+@media only screen and (max-width: 700px) {
+    .tag_text{
+        font-size: 25px;
+    }
+    .edu_container{
+        width: 90%;
+        min-width: 90%;
+    }
+}
