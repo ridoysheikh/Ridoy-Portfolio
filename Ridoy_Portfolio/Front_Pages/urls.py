@@ -8,4 +8,5 @@ urlpatterns = [
     path('', home,name="home"),
     path('resume/', resumes,name="resume"),
     path('contact/', contact,name="contact"),
+    path('api/', api, name="api"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

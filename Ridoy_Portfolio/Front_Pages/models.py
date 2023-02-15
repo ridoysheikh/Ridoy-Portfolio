@@ -14,3 +14,24 @@ class navs(models.Model):
         self.nv_logo.delete()
         # Call the superclass method
         super().delete(*args, **kwargs)
+
+class bg_images(models.Model):
+    Portrait="Portrait"
+    Landscape="Landscape"
+    bg_mode_CHOICES = [
+        (Portrait, 'Portrait'),
+        (Landscape, 'Landscape'),
+    ]
+    bg_mode = models.CharField(
+        max_length=20,
+        choices=bg_mode_CHOICES,
+        default=Landscape,
+        blank=False,
+    )
+    bg_image=models.ImageField(upload_to='bg_image/front')
+
+    def delete(self, *args, **kwargs):
+        # Delete the image associated with the instance
+        self.bg_image.delete()
+        # Call the superclass method
+        super().delete(*args, **kwargs)

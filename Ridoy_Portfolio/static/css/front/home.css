@@ -7,6 +7,7 @@
     width: 100%;
     z-index: -1;
     position: absolute;
+    transition: background 1s ease-in;
 
 }
 .main_container{
