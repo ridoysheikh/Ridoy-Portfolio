@@ -1,5 +1,5 @@
 .bg_container{
-    background-image: url('https://i.postimg.cc/RZnmKHh5/24.jpg');
+    background-image: url();
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -8,7 +8,6 @@
     z-index: -1;
     position: absolute;
     transition: background 1s ease-in;
-
 }
 .main_container{
     background-color: rgba(0, 0, 0, 0.750);

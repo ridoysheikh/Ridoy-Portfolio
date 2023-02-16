@@ -1,5 +1,10 @@
-let txt = ["Freelauncer", "Web Devoloper", "Web Designer"]
-window.onload = typeWriter(".profs",50,2000,txt);
+let txt = [];
+window.onload = fetch(`/api/?name=profession`).then(response => response.json())
+.then(data => {
+  data = JSON.stringify(data);
+  text=JSON.parse(data).text;
+  typeWriter(".profs",50,2000,text);
+});
 
 
 var bgimage;

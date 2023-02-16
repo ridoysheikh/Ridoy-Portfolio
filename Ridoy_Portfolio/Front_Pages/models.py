@@ -35,3 +35,18 @@ class bg_images(models.Model):
         self.bg_image.delete()
         # Call the superclass method
         super().delete(*args, **kwargs)
+
+
+class profession(models.Model):
+    name=models.TextField(max_length=35,null=False, blank=False)
+
+class social_id(models.Model):
+    name=models.TextField(max_length=35,null=False, blank=False)
+    links=models.TextField(max_length=35,null=False, blank=False)
+    logo_img=models.ImageField(upload_to='social_logo/front')
+
+    def delete(self, *args, **kwargs):
+        # Delete the image associated with the instance
+        self.bg_image.delete()
+        # Call the superclass method
+        super().delete(*args, **kwargs)

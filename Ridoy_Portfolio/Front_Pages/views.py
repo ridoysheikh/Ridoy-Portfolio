@@ -15,12 +15,16 @@ def api(request):
             images = bg_images.objects.filter(bg_mode=scr_size).values_list('bg_image', flat=True)
             images=list(images)
             return JsonResponse({'images':images})
-
+        elif request.GET.get('name') == "profession":
+            text=profession.objects.values_list('name', flat=True)
+            text=list(text)
+            return JsonResponse({'text':text})
 
 def home(request):
     title = "Home"
     navs_item = navs.objects.get(pk=1)
-    return render(request, 'front/home.html',context={'title': title, 'navs': navs_item})
+    social=social_id.objects.all()
+    return render(request, 'front/home.html',context={'title': title, 'navs': navs_item, 'social':social})
 
 def resumes(request):
     title = "Resume"
