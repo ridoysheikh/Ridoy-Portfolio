@@ -18,9 +18,7 @@ setInterval(() => {
     } else {
         document.querySelector(".loader").style.display = "flex";
     }
-}, 10);
-
-
+}, 100);
 async function typeWriter(output,timing,rtiming,element){
     for(var i = 0; i < element.length;i++){
         document.querySelector(output).innerHTML ="";

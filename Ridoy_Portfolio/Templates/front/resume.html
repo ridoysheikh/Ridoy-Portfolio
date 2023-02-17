@@ -18,12 +18,13 @@
     <!-- Main Content Of EDUCATION & EXPERICENCE start-->
     <div class="rflex rrow edu_wrapper">
         
-        
-        <!--Item Containers Start-->
+        {% for x in edu %}
+             <!--Item Containers Start-->
         <div class="edu_container rflex rcolumn">
-            <p>My Education</p>
-       
+            <p>{{ x.name }}</p>
             <!-- single Item Containers Start-->
+            {% for y in x.educations_set.all %}
+            
                 <div class="items_container rflex rrow">
                     <div class="hory_line">
                         <span class="line-rodio material-symbols-outlined">
@@ -31,96 +32,20 @@
                         </span>
                     </div>
                     <div class="rcolumn">
-                        <p class="cont_title">Bachelor in Bussiness Studies</p>
+                        <p class="cont_title">{{ y.title }}</p>
                         <div class="item_institute rflex rrow">
-                            <p>Matibhanga degree collage | &nbsp</p>
-                            <p>2019 - current</p>
+                            <p>{{ y.institute }} | &nbsp</p>
+                            <p>{{ y.start_year }} - {{ y.end_year }}</p>
                         </div>
-                        <p class="cont_details">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque cupiditate illo, quia vel dolorem voluptates possimus rem distinctio quaerat quidem repellat animi, voluptatem, dicta quod corporis assumenda laborum delectus explicabo.</p>
+                        <p class="cont_details">{{ y.description }}</p>
                     </div>
                 </div>
-            <!-- single Item Containers end-->
-            <!-- single Item Containers Start-->
-            <div class="items_container rflex rrow">
-                <div class="hory_line">
-                    <span class="line-rodio material-symbols-outlined">
-                        radio_button_checked
-                    </span>
-                </div>
-                <div class="rcolumn">
-                    <p class="cont_title">Bachelor in Bussiness Studies</p>
-                    <div class="item_institute rflex rrow">
-                        <p>Matibhanga degree collage | &nbsp</p>
-                        <p>2019 - current</p>
-                    </div>
-                    <p class="cont_details">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque cupiditate illo, quia vel dolorem voluptates possimus rem distinctio quaerat quidem repellat animi, voluptatem, dicta quod corporis assumenda laborum delectus explicabo.</p>
-                </div>
-            </div>
-            <!-- single Item Containers end-->
-            <!-- single Item Containers Start-->
-                <div class="items_container rflex rrow">
-                    <div class="hory_line">
-                        <span class="line-rodio material-symbols-outlined">
-                            radio_button_checked
-                        </span>
-                    </div>
-                    <div class="rcolumn">
-                        <p class="cont_title">Bachelor in Bussiness Studies</p>
-                        <div class="item_institute rflex rrow">
-                            <p>Matibhanga degree collage | &nbsp</p>
-                            <p>2019 - current</p>
-                        </div>
-                        <p class="cont_details">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque cupiditate illo, quia vel dolorem voluptates possimus rem distinctio quaerat quidem repellat animi, voluptatem, dicta quod corporis assumenda laborum delectus explicabo.</p>
-                    </div>
-                </div>
-            <!-- single Item Containers end-->
-            <!-- single Item Containers Start-->
-            <div class="items_container rflex rrow">
-                <div class="hory_line">
-                    <span class="line-rodio material-symbols-outlined">
-                        radio_button_checked
-                    </span>
-                </div>
-                <div class="rcolumn">
-                    <p class="cont_title">Bachelor in Bussiness Studies</p>
-                    <div class="item_institute rflex rrow">
-                        <p>Matibhanga degree collage | &nbsp</p>
-                        <p>2019 - current</p>
-                    </div>
-                    <p class="cont_details">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque cupiditate illo, quia vel dolorem voluptates possimus rem distinctio quaerat quidem repellat animi, voluptatem, dicta quod corporis assumenda laborum delectus explicabo.</p>
-                </div>
-            </div>
-            <!-- single Item Containers end-->
-        
+           
+            {% endfor %}
+             <!-- single Item Containers end-->
         </div>
         <!--Item Containers end-->
-
-        <!--Item Containers Start-->
-        <div class="edu_container rflex rcolumn">
-            <p>My Education</p>
-       
-            <!-- single Item Containers Start-->
-                <div class="items_container rflex rrow">
-                    <div class="hory_line">
-                        <span class="line-rodio material-symbols-outlined">
-                            radio_button_checked
-                        </span>
-                    </div>
-                    <div class="rcolumn">
-                        <p class="cont_title">Bachelor in Bussiness Studies</p>
-                        <div class="item_institute rflex rrow">
-                            <p>Matibhanga degree collage | &nbsp</p>
-                            <p>2019 - current</p>
-                        </div>
-                        <p class="cont_details">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque cupiditate illo, quia vel dolorem voluptates possimus rem distinctio quaerat quidem repellat animi, voluptatem, dicta quod corporis assumenda laborum delectus explicabo.</p>
-                    </div>
-                </div>
-            <!-- single Item Containers end-->
-        
-        </div>
-        <!--Item Containers end-->
-
-
+        {% endfor %}
     </div>
     <!-- Main Content Of EDUCATION & EXPERICENCE end-->
     <!--Education end-->
@@ -134,33 +59,23 @@
     <div class="rflex rrow edu_wrapper">
     
         <!--Item Containers Start-->
+        {% for x in skill %}
         <div class="edu_container rflex rcolumn">
-            <p>My Skills</p>
-       
+            <p>{{ x.name }}</p>
             <!-- single Item Containers Start-->
+            {% for y in x.skills_set.all %}
             <div class="items_container_sk rflex rcolumn">
                 <div class="rflex rrow sk_h">
-                    <p class="sk_h_tag">HTML</p>
-                    <p class="sk_h_prog">80 %</p>
+                    <p class="sk_h_tag">{{ y.title|upper }}</p>
+                    <p class="sk_h_prog">{{ y.proggress}} %</p>
                 </div>
                 <div class="progg_bg">
-                    <div class="progg_fr" style="width: 80%;"></div>
+                    <div class="progg_fr" style="width: {{ y.proggress}}%;"></div>
                 </div>
             </div>
+            {% endfor %}
             <!-- single Item Containers end-->
-            <!-- single Item Containers Start-->
-            <div class="items_container_sk rflex rcolumn">
-                <div class="rflex rrow sk_h">
-                    <p class="sk_h_tag">css</p>
-                    <p class="sk_h_prog">70 %</p>
-                </div>
-                <div class="progg_bg">
-                    <div class="progg_fr" style="width: 70%;"></div>
-                </div>
-            </div>
-            <!-- single Item Containers end-->
-        
-        </div>
+        {% endfor %}
         <!--Item Containers end-->
 
 

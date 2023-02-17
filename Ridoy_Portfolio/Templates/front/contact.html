@@ -8,31 +8,35 @@
 {% block front %}
 <div class="item_container rflex rrow">
     <div class="form_cont rflex rcolumn">
-        <form>      
+        <form method="POST" action="">   
+            {% csrf_token %}   
             <input name="name" type="text" class="feedback-input" placeholder="Name" required/>   
             <input name="email" type="email" class="feedback-input" placeholder="Email" required/>
-            <textarea name="text" class="feedback-input" placeholder="Massage" required></textarea>
+            <textarea name="message" class="feedback-input" placeholder="Message" required></textarea>
             <input type="submit" value="SUBMIT"/>
           </form>
     </div>
     <div class="about_cont rflex rcolumn"> <ul class="contact-list">
-        <p class="greeting_text">Feel free to contact Me, I will be very happy to assist you!</p>
+        <p class="greeting_text">{{ contacts.title }}</p>
 
         <li class="list-item"><span class="material-symbols-outlined">map</span>
-            <p class="contact-text">City, State</p></li>
+            <p class="contact-text">{{ contacts.adresses }}</p></li>
         
         <li class="list-item"><span class="material-symbols-outlined">call</span>
-            <p class="contact-text"><a href="tel:1-212-555-5555" title="Give me a call">(212) 555-2368</a></p></li>
+            <p class="contact-text"><a href="tel:{{ contacts.phone }}" title="Give me a call">{{ contacts.phone }}</a></p></li>
         
         
         <li class="list-item"><span class="material-symbols-outlined">mail</span>
-            <p class="contact-text"><a href="mailto:#" title="Give me a call">ridoysheikh778@gmail.com</a></p></li>
+            <p class="contact-text"><a href="mailto:{{ contacts.email }}" title="Send me a Email">{{ contacts.email }}</a></p></li>
         
         <li class="list-item"><span class="material-symbols-outlined">public</span>
-            <p class="contact-text"><a href="#" title="Give me a call">ridoysheikh.com</a></p></li>
-
-        
+            <p class="contact-text"><a href="http://{{ contacts.website }}">{{ contacts.website }}</a></p></li>
       </ul>
     </div>
 </div>
+{% if success %}
+<script>
+    alert("Message Sended successfully")
+</script>
+{% endif %}
 {% endblock  %}
