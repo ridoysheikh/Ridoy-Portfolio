@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/dashboard/main.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Bungee+Inline&family=Cinzel:wght@400;500;600&family=DM+Serif+Display&family=Monoton&family=Paprika&family=Play&family=Playfair+Display:wght@500&family=Poppins:wght@100;300;400;500&family=Roboto+Mono:wght@100;200&display=swap" rel="stylesheet">
+    <title>{{ title }}</title>
+    {% block heads %}
+    {% endblock  %}
+</head>
+<body>
+    <div class="nav" id="nav">
+
+    </div>
+    <div class="body rflex rcolumn">
+        <div class="header rflex rrow">
+            <span class="material-symbols-outlined" id="tgl_btn" onclick="toggleNav()">
+                close
+            </span>
+        </div>
+    </div>
+</body>
+<script src="{% static 'js/dashboard/main.js' %}"></script>
+</html>

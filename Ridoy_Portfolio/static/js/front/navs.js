@@ -1,3 +1,4 @@
+document.querySelector(".main_nav").style.left = "-300px";
 function tooglenavs() {
     if(document.querySelector(".main_nav").style.left == "-300px"){
         document.querySelector(".main_nav").style.left = "0px";

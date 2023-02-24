@@ -1,0 +1,85 @@
+:root {
+    /* define the color palates for dark */
+    --dk-60: rgb(134, 65, 40);
+    --dk-30: coral;
+    --dk-10: coral;
+    --dk-tx: rgb(214, 214, 230);
+    /* define the color palates for dark */
+    --lt-60: #FBEAFF;
+    --lt-30: #351D5C;
+    --lt-10: #674A8F;
+    --lt-tx: #03f3cb;
+    /* main color variable that will be use in all around */
+    --col-60: var(--lt-60);
+    --col-30: var(--lt-30);
+    --col-10: var(--lt-10);
+    --col-tx: var(--lt-tx);
+    /* some change able variables */
+    --nav-width: 250px;
+    
+  }
+
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    user-select: none;
+}
+
+/* reapet uses classes */
+.rflex{
+    display: flex;
+}
+.rcolumn{
+   flex-direction: column;
+}
+.rrow{
+    flex-direction: row;
+}
+.rcenter{
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.btn{
+    background-color: var(--col-10);
+    color: var(--col-tx);
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+
+
+/* single usses classes */
+body{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 100vh;
+    width: 100%;
+}
+.nav{
+    background-color: var(--col-30);
+    width: var(--nav-width);
+    transition: width .5s ease-in-out;
+
+}
+.body{
+    background-color: var(--col-60);
+    width: calc(100% - var(--nav-width));
+    transition: width .5s ease-in-out;
+}
+.header{
+    width: 100%;
+    height: 50px;
+    background-color: var(--col-tx);
+    align-items: center;
+}
+#tgl_btn{
+    margin: 10px;
+    font-size: 40px;
+}
