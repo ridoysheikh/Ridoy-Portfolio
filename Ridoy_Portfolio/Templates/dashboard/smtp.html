@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block heads %}
+<link rel="stylesheet" href="{% static 'css/dashboard/smtp.css' %}">
+{% endblock  %}
+{% block content %}
+        <div class="header_text tx-2 fs-30 w-100">
+            Change SMTP Configurations
+        </div>
+        <form action="" method="post" enctype="multipart/form-data" class="contents">
+            {% csrf_token %}
+        <lebel class="w-100 lebel">SERVER</lebel>
+        <input type="text" name="server" class="w-100" placeholder="Input Your SERVER Address" value="{{ smtp.server }}" required>
+
+        <lebel class="w-100 lebel">Port</lebel>
+        <input type="number" max="9999" min="10" name="port" class="w-100" placeholder="Input Your SMTP Port" value="{{ smtp.port }}" required>
+
+        <lebel class="w-100 lebel">USERNAME</lebel>
+        <input type="text" name="username" class="w-100" placeholder="Input Your USERNAME" value="{{ smtp.username }}" required>
+
+        <lebel class="w-100 lebel">Password</lebel>
+        <input type="password" name="password" class="w-100" placeholder="Input Your Password" value="{{ smtp.password }}" required>
+
+        <lebel class="w-100 lebel">Reciever Email</lebel>
+        <input type="email" name="receiver_mail" class="w-100" placeholder="Input Your Email" value="{{ smtp.receiver_mail }}" required>
+        
+        <button type="submit" class="btn w-100">Change</button>
+        </form>
+{% endblock  %}

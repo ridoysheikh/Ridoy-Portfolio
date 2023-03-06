@@ -28,3 +28,7 @@ Ridoy_Portfolio/*/*/*.jpeg
 Ridoy_Portfolio/*/*/*/*.jpeg
 Ridoy_Portfolio/*/migrations/*.py
 
+Ridoy_Portfolio/*.sqlite3
+*/*.sqlite3
+*.sqlite3
+Ridoy_Portfolio/*/*.sqlite3

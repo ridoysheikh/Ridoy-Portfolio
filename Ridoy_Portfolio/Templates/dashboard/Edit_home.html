@@ -1,0 +1,138 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block heads %}
+<link rel="stylesheet" href="{% static 'css/dashboard/edithome.css' %}">
+{% endblock  %}
+{% block content %}
+        <div class="image_view rflex rcolumn rcenter">
+            <span class="material-symbols-outlined" id="img_cls" onclick="hide_img()">
+                close
+            </span>
+            <img src=""  alt="fdhgdfh" id="view_img">
+        </div>
+        <div class="contents">
+           
+           <div class="card">
+                <div class="card_name">
+                    Profession
+                </div>
+                <form action="" method="POST" enctype="multipart/form-data" class="form-control">
+                    {% csrf_token %}
+                    <input type="text" name="pname" placeholder="Enter A new Profession" required>
+                    <button type="submit" class="btn">Create New</button>
+                </form>
+                <br>
+                <table cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Sl</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for x in prof %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ x.name }}</td>
+                            <td><a href="{% url 'del_prof' x.id %}"><span class="material-symbols-outlined" style="color: red;">
+                                delete
+                                </span></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+           </div>
+
+
+
+           <div class="card">
+            <div class="card_name">
+                Social ID's
+            </div>
+            <form action="" method="POST" enctype="multipart/form-data" class="form-control">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Enter A new Name" style="height: 40px;" required>
+                <input type="text" name="links" placeholder="Enter A new Link" style="height: 40px;" required>
+                <lebel style="height: 40px;"> Choose Icon </lebel>
+                <input type="file" name="logo_img" style="height: 40px;" accept="image/*" required>
+                <button type="submit" class="btn">Create New</button>
+            </form>
+            <br>
+            <table cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Name</th>
+                        <th>Icon</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for x in sid %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ x.name }}</td>
+                        <td><a href="{{ x.links }}" target="_blank"><img src="/media/{{ x.logo_img }}" height="20px" width="20px" alt=""></a></td>
+                        <td><a href="{% url 'del_social' x.id %}"><span class="material-symbols-outlined" style="color: red;">
+                            delete
+                        </span></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+       </div>
+
+
+       <div class="card">
+        <div class="card_name">
+            Background Images
+        </div>
+        <form action="" method="POST" enctype="multipart/form-data" class="form-control">
+            {% csrf_token %}
+            <select name="bg_mode" class="w-100">
+                <option value="Landscape">Landscape</option>
+                <option value="Portrait">Portrait</option>
+            </select>
+            <lebel style="height: 40px;"> Choose image </lebel>
+            <input type="file" name="bg_image" style="height: 40px;" accept="image/*" required>
+            <button type="submit" class="btn">Create New</button>
+        </form>
+        <br>
+        <table cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Sl</th>
+                    <th>Mode</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for x in bg_image %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ x.bg_mode }}</td>
+                    <td><img src="/media/{{ x.bg_image }}" height="20px" alt="" onclick="show_img('/media/{{ x.bg_image }}')"></td>
+                    <td><a href="{% url 'del_bg' x.id %}"><span class="material-symbols-outlined" style="color: red;">
+                        delete
+                    </span></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   </div>
+
+<script>
+    function show_img(src){
+        document.querySelector(".image_view").style.display ="flex";
+        document.getElementById("view_img").src = src;
+    }
+    function hide_img(){
+        document.querySelector(".image_view").style.display ="none";
+    }
+
+</script>
+
+    </div>
+{% endblock  %}

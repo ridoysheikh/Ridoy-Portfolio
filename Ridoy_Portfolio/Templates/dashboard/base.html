@@ -17,9 +17,84 @@
     {% endblock  %}
 </head>
 <body>
+
+    <div class="loader rflex rcenter rcolumn">
+        <div class="loader_icon"></div>
+    </div>
     <!--Navs Start-->
     <div class="nav" id="nav">
-        
+         <!--User Sections Start-->
+        <div class="profile_tab rflex rcolumn">
+            <div class="pro_main rflex rrow">
+                <img src="{% static 'avater.jpg' %}" alt="">
+                <div class="pro_texts rflex rcenter rcolumn">
+                    <p>Ridoy Sheikh</p>
+                    <p>ridoysheikhh778@gmail.com</p>
+                </div>
+            </div>
+            <hr>
+            <div class="pro_btns rflex rrow">
+                <a href="" title="Edit Profile">
+                    <span class="material-symbols-outlined icons">
+                    settings
+                    </span>
+                </a>
+                <a href="{% url 'logout' %}" title="Log Out">
+                    <span class="material-symbols-outlined icons">
+                    logout
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--User Sections End-->
+
+        <!--Menu Group Start-->
+
+        <!--single menu start-->
+        <div class="menu rflex rcolumn {% if section == "front" %}active{% endif %}" id="menu">
+            <div class="menu_head rflex rrow" onclick="showMenu(event)">
+                <p class="fs-25">Front</p>
+                <span class="material-symbols-outlined gte">
+                arrow_forward_ios
+                </span>
+            </div>
+
+            <div class="menu_btns rflex rcolumn">
+                <a href="{% url 'home_set' %}">Home</a>
+            </div>
+
+            <div class="menu_btns rflex rcolumn">
+                <a href="{% url 'contact_set' %}">Addresses</a>
+            </div>
+
+        </div>
+         <!--single menu end-->
+
+        <!--single menu start-->
+        <div class="menu rflex rcolumn {% if section == "settings" %}active{% endif %}" id="menu">
+            <div class="menu_head rflex rrow" onclick="showMenu(event)">
+                <p class="fs-25">Settings</p>
+                <span class="material-symbols-outlined gte">
+                arrow_forward_ios
+                </span>
+            </div>
+            <div class="menu_btns rflex rcolumn">
+                <a href="{% url 'site_info' %}">Site Info</a>
+            </div>
+
+            <div class="menu_btns rflex rcolumn">
+                <a href="{% url 'smtp' %}">SMTP</a>
+            </div>
+
+
+        </div>
+         <!--single menu end-->
+
+
+
+
+        <!--Menu Group End-->
+
     </div>
     <!--Navs End-->
     <!--Body Start-->
@@ -29,10 +104,12 @@
                 close
             </span>
         </div>
-        <div class="maincontent rflex rcolumn rcenter">
-            <div class="w-100 btn"></div>
+        <div class="maincontent">
+            {% block content %}
+            {% endblock  %}
         </div>
     </div>
 </body>
 <script src="{% static 'js/dashboard/main.js' %}"></script>
+{% block footer %}{% endblock  %}
 </html>

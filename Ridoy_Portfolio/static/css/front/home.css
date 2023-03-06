@@ -59,7 +59,7 @@
 }
 .vl{
     height: 30px;
-    width: 5px;
+    width: 3px;
     background-color: rgb(53, 117, 212);
     animation: blinking .6s linear infinite;
 }

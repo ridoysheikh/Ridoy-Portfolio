@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block heads %}
+<link rel="stylesheet" href="{% static 'css/dashboard/site_info.css' %}">
+{% endblock  %}
+{% block content %}
+        <div class="header_text tx-2 fs-30 w-100">
+            Change Site Informations
+        </div>
+        <form action="" method="post" enctype="multipart/form-data" class="contents">
+            {% csrf_token %}
+        <lebel class="w-100 lebel">Display Name</lebel>
+        <input type="text" name="title" class="w-100" placeholder="Input Your Display Name" value="{{ navs.nv_title }}" required>
+        
+        <lebel class="w-100 lebel">Logo</lebel>
+        <input type="file" class="w-100" name="image" accept="image/*">
+        
+        <lebel class="w-100 lebel">SEO Title</lebel>
+        <input type="text" name="seo_title" class="w-100" placeholder="Input Your SEO Title" value="{{ navs.seo_title }}" required>
+
+        <lebel class="w-100 lebel">Description</lebel>
+        <textarea type="text" name="Description" class="w-100" placeholder="Input Your Description" required>{{ navs.seo_description }}</textarea>
+
+        <lebel class="w-100 lebel">SEO Tags</lebel>
+        <textarea type="text" name="Tags" class="w-100" placeholder="Input Your SEO Tags With comma" required>{{ navs.seo_keys }}</textarea>
+        <br>
+        <button type="submit" class="btn w-100">Change</button>
+        </form>
+{% endblock  %}

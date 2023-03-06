@@ -44,7 +44,7 @@ def contact(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         messages = request.POST.get('message')
-        Email_body = f'Frome: {name} ({email}) \n {messages}'
+        Email_body = f'From: {name} ({email}) \n {messages}'
         # Get smtp data
         smtps=smtp.objects.get(pk=1)
         # Set up the SMTP connection

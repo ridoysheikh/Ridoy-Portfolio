@@ -59,7 +59,7 @@ class social_id(models.Model):
 
     def delete(self, *args, **kwargs):
         # Delete the image associated with the instance
-        self.bg_image.delete()
+        self.logo_img.delete()
         # Call the superclass method
         super().delete(*args, **kwargs)
 class edu_cat(models.Model):

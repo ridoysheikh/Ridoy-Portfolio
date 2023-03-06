@@ -34,7 +34,7 @@ async function typeWriter(output,timing,rtiming,element){
 
         }
         if(i == (element.length-1)){
-            i=-1;
+            i=0;
         }
  }
 }

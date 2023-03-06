@@ -19,5 +19,13 @@ from .views import *
 urlpatterns = [
     path('login/', log_in,name='login'),
     path('dashboard/', dashboard,name='dashboard'),
+    path('logout/', Logout,name='logout'),
+    path('settings/sites/infos/', site_info, name="site_info"),
+    path('settings/smtp/', smtp_settings, name="smtp"),
+    path('settings/contact/', contact, name="contact_set"),
+    path('settings/home/', home_set, name="home_set"),
+    path('delete/prof/<id>/', del_prof, name="del_prof"),
+    path('delete/social/<id>/', del_social, name="del_social"),
+    path('delete/bg/<id>/', del_bg, name="del_bg"),
 
 ]

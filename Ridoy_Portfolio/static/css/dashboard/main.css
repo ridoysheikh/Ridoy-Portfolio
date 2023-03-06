@@ -4,16 +4,19 @@
     --dk-30: coral;
     --dk-10: coral;
     --dk-tx: rgb(214, 214, 230);
+    --dk-tx2: #03f3cb;
     /* define the color palates for dark */
     --lt-60: #FBEAFF;
     --lt-30: #351D5C;
     --lt-10: #674A8F;
     --lt-tx: #03f3cb;
+    --lt-tx2: #3A4A3F;
     /* main color variable that will be use in all around */
     --col-60: var(--lt-60);
     --col-30: var(--lt-30);
     --col-10: var(--lt-10);
     --col-tx: var(--lt-tx);
+    --col-tx2: var(--lt-tx2);
     /* some change able variables */
     --nav-width: 250px;
     
@@ -27,6 +30,7 @@
     user-select: none;
     color: var(--col-tx);
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 a{
     display: block;
@@ -44,19 +48,38 @@ a{
 .rcenter{
     justify-content: center;
     align-items: center;
-    justify-items: center;
 }
 .w-100{
-    width: 90%;
+    width: 95%;
 }
 .w-75{
     width: 70%;
 }
 .w-50{
     width: 45%;
+    min-width: 250px;
 }
 .w-25{
     width: 20%;
+    min-width: 150px;
+}
+.fs-15{
+    font-size: 15px;
+}
+.fs-20{
+    font-size: 20px;
+}
+.fs-25{
+    font-size: 25px;
+}
+.fs-30{
+    font-size: 30px;
+}
+.fs-40{
+    font-size: 40px;
+}
+.fs-50{
+    font-size: 50px;
 }
 .btn{
     background-color: var(--col-10);
@@ -72,7 +95,112 @@ a{
 .btn:hover{
     background-color: var(--col-30);
 }
+input{
+    padding: 10px 20px;
+    height: 50px;
+    font-size: 20px;
+    color: var(--col-tx2);
+    border: 1px solid var(--col-30);
+    border-radius: 5px;
+    transition: .2s ease-in-out;
+    font-family: 'Play', sans-serif;
+}
+input:focus{
+    box-shadow: 0 0 7px 0px var(--col-30);
+    outline: none;
+}
 
+select{
+    padding: 10px 20px;
+    height: 50px;
+    font-size: 20px;
+    color: var(--col-tx2);
+    border: 1px solid var(--col-30);
+    border-radius: 5px;
+    transition: .2s ease-in-out;
+    font-family: 'Play', sans-serif;
+}
+select:focus{
+    box-shadow: 0 0 7px 0px var(--col-30);
+    outline: none;
+}
+
+
+textarea{
+    padding: 10px 20px;
+    height: 200px;
+    font-size: 20px;
+    color: var(--col-tx2);
+    border: 1px solid var(--col-30);
+    border-radius: 5px;
+    transition: .2s ease-in-out;
+    resize: vertical;
+    font-family: 'Play', sans-serif;
+}
+textarea:focus{
+    box-shadow: 0 0 7px 0px var(--col-30);
+    outline: none;
+}
+lebel{
+    padding: 10px;
+    text-align: left;
+    color: var(--col-tx2);
+    font-size: 20px;
+    margin: 10px 0 0 0;
+    font-family: 'Play', sans-serif;
+}
+.header_text{
+    margin: 20px 0;
+    padding: 20px 10px;
+    box-shadow: 0px 0px 3px  rgba(0, 0, 0, 0.651);
+    border-radius: 10px;
+    text-align: center;
+}
+table{
+    overflow-x: scroll;
+    border:0px solid transparent;
+
+}
+tbody{
+    overflow-y: scroll;
+}
+tbody::-webkit-scrollbar{
+    display: none;
+}
+table th{
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+}
+thead tr{
+    background-color: var(--col-10);
+    height: 50px;
+}
+tbody td{
+    color: var(--col-tx2);
+    text-align: center;
+    padding: 5px;
+}
+tbody tr{
+    height: 30px;
+    text-align: center;
+    
+}
+tbody tr:nth-child(odd){
+    background-color: var(--col-tx);
+}
+tbody tr:nth-child(even){
+    background-color: var(--col-60);
+}
+
+
+
+.tx-1{
+    color: var(--col-tx);
+}
+.tx-2{
+    color: var(--col-tx2);
+}
 
 /* single usses classes */
 body{
@@ -88,6 +216,10 @@ body{
     transition: width .5s ease-in-out;
     overflow-x: hidden;
     z-index: 50;
+    overflow-y: scroll;
+}
+.nav::-webkit-scrollbar{
+    display: none;
 }
 .body{
     background-color: var(--col-60);
@@ -106,14 +238,120 @@ body{
     width: 100%;
     height: calc(100vh - 50px);
     padding: 20px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-
 #tgl_btn{
     margin: 10px;
     font-size: 40px;
     z-index: 50;
     color: var(--col-10);
+}
+.loader{
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(183, 203, 241);
+    z-index: 2000;
+    display: flex;
+    opacity: 1;
+    transition: opacity .3s linear;
+}
+.loader_icon{
+    height: 35px;
+    width: 35px;
+    border: 10px solid rgb(134, 76, 192);
+    border-top: 10px solid rgb(183, 203, 241);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+/* Pfofile tab */
+.profile_tab{
+    width: 100%;
+    background-color: var(--col-10);
+    padding: 10px 10px 5px;
+    margin-bottom: 30px;
+}
+.pro_main{
+    height: 90px;
+    overflow-y: hidden;
+}
+.pro_main::-webkit-scrollbar{
+    display: none;
+}
+.profile_tab img{
+    height: 80px;
+    max-width: 80px;
+}
+.profile_tab p{
+    padding: 5px;
+    line-break: anywhere;
+}
+.profile_tab p:nth-child(1){
+    font-size: 18px;
+}
+.pro_btns{
+    width: 100%;
+    justify-content: center;
+    padding: 10px 0 0 0;
+}
+.pro_btns .icons{
+    margin: 5px 10px; 
+    font-size: 25px;
+    color: var(--col-tx2);
+    transition: .2s ease-in-out;
+}
+.pro_btns a:hover > .icons{
+    color: var(--col-tx);
+}
+
+/* navs buttons */
+.menu{
+    width: 100%;
+    padding: 10px 0;
+    background-color: var(--col-10);
+    margin: 5px 0px;
+}
+
+.menu_head{
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px 25px ;
+    align-items: center;
+}
+.menu_head .gte{
+    font-size: 15px;
+    transition: .2s ease-in-out;
+}
+.menu_btns {
+    height: 0px;
+    overflow: hidden;
+    transition: height .5s ease-in-out;
+}
+
+.active > .menu_btns{
+    height: max-content;
+}
+.active a{
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    transition: .3s ease-in-out;
+}
+.active .gte{
+    transform: rotate(90deg);
+}
+.active a:hover{
+    background-color: var(--col-30);
 }
 
 @media only screen and (max-width: 700px) {

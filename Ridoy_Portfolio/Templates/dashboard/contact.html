@@ -1,0 +1,31 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block heads %}
+<link rel="stylesheet" href="{% static 'css/dashboard/smtp.css' %}">
+{% endblock  %}
+{% block content %}
+        <div class="header_text tx-2 fs-30 w-100">
+            Change Addresses
+        </div>
+        <form action="" method="post" enctype="multipart/form-data" class="contents">
+            {% csrf_token %}
+        <lebel class="w-100 lebel">Wellcome Text</lebel>
+        <input type="text" name="title" class="w-100" placeholder="Input Your Wellcome Text" value="{{ contact.title }}" required>
+
+        <lebel class="w-100 lebel">Address</lebel>
+        <input type="text" name="adresses" class="w-100" placeholder="Input Your Addresses" value="{{ contact.adresses }}" required>
+
+        <lebel class="w-100 lebel">Phone Number</lebel>
+        <input type="number" name="phone" class="w-100" placeholder="Input Your Phone Number" value="{{ contact.phone }}" required>
+
+        <lebel class="w-100 lebel">Email</lebel>
+        <input type="email" name="email" class="w-100" placeholder="Input Your Email" value="{{ contact.email }}" required>
+
+        <lebel class="w-100 lebel">Website</lebel>
+        <input type="text" name="website" class="w-100" placeholder="Input Your Wellcome Text" value="{{ contact.website }}" required>
+
+        
+        <br>
+        <button type="submit" class="btn w-100">Change</button>
+        </form>
+{% endblock  %}
