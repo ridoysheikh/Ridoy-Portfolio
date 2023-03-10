@@ -1,0 +1,68 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block heads %}
+<link rel="stylesheet" href="{% static 'css/dashboard/resume.css' %}">
+{% endblock  %}
+{% block content %}
+
+<div class="header_text tx-2 fs-30 w-100">
+    Educations
+</div>
+<a href="{% url 'add_edu' %}" class="btn w-50">Add New</a>
+<br>
+<table cellspacing="0" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Sl</th>
+            <th>Name</th>
+            <th>Institute</th>
+            <th>Subject</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for x in education %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ x.title }}</td>
+            <td>{{ x.institute }}</td>
+            <td>{{ x.catagory.name }}</td>
+            <td><a href="{% url 'eduedit' x.id %}"><span class="material-symbols-outlined" style="color: blue;">
+                edit
+            </span></a>
+                <a href="{% url 'edudel' x.id %}"><span class="material-symbols-outlined" style="color: red;">
+                delete
+            </span></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<div class="header_text tx-2 fs-30 w-100">
+    Skills
+</div>
+<a href="{% url 'add_skils' %}" class="btn w-50">Add New</a>
+<table cellspacing="0" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Sl</th>
+            <th>Name</th>
+            <th>Subjects</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for x in skils %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ x.title }}</td>
+            <td>{{ x.catagory.name }}</td>
+            <td>
+                <a href="{% url 'skilsdel' x.id %}"><span class="material-symbols-outlined" style="color: red;">
+                delete
+            </span></a></td>
+        </tr>
+        {% endfor %}
+</table>
+{% endblock  %}

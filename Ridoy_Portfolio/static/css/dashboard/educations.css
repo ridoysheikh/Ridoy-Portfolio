@@ -1,0 +1,21 @@
+.contents{
+    align-items: center;
+    width: 100%;
+    padding: 10px 10px 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 50px 30px;
+}
+.contentsc{
+    align-items: center;
+    width: 100%;
+    padding: 10px 10px 30px;
+    display: flex;
+    flex-direction: row;
+    
+}
+@media only screen and (max-width: 700px){
+    .contents{
+        padding: 10px 20px 30px;
+    }
+}

@@ -1,0 +1,71 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block heads %}
+<link rel="stylesheet" href="{% static 'css/dashboard/educations.css' %}">
+{% endblock  %}
+{% block content %}
+
+<div class="header_text tx-2 fs-30 w-100">
+    Catagory
+</div>
+<form action="" method="post" enctype="multipart/form-data" class="contentsc">
+    {% csrf_token %}
+<input type="text" name="catname" class="w-50" placeholder="Input Your Display Name" required>
+
+<button type="submit" class="btn w-50">ADD</button>
+</form>
+<table cellspacing="0" class="w-100">
+    <thead>
+        <tr>
+            <th>Sl</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for x in edu %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ x.name }}</td>
+            <td><a href="{% url 'educatdel' x.id %}"><span class="material-symbols-outlined" style="color: red;">
+                delete
+            </span></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+        <div class="header_text tx-2 fs-30 w-100">
+            Add Educations And Experience
+        </div>
+        <form action="" method="post" enctype="multipart/form-data" class="contents f">
+            {% csrf_token %}
+        <lebel class="w-100 lebel">Title</lebel>
+        <input type="text" name="title" class="w-100" placeholder="Input Your Title" required>
+
+        <lebel class="w-100 lebel">Institute</lebel>
+        <input type="text" name="institute" class="w-100" placeholder="Input Your Institute Name" required>
+        
+        
+        <lebel class="w-100 lebel">Start Year</lebel>
+        <input type="number" name="start_year" class="w-100" placeholder="Input Your Start Year" required>
+
+        <lebel class="w-100 lebel">End Year</lebel>
+        <input type="text" name="end_year" class="w-100" placeholder="Input Your End Year" required>
+
+        <lebel class="w-100 lebel">Description</lebel>
+        <textarea type="text" name="description" class="w-100" placeholder="Input Your Description" required>{{ navs.seo_description }}</textarea>
+
+
+        <lebel class="w-100 lebel">Catagory</lebel>
+        <select name="catagory" class="w-100">
+            {% for x in edu %}
+            <td></td>
+            <option value="{{ x.id }}">{{ x.name }}</option>
+        {% endfor %}
+        </select>
+        
+        <br>
+        <button type="submit" class="btn w-100">Change</button>
+        </form>
+{% endblock  %}

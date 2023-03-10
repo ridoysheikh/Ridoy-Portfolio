@@ -27,5 +27,13 @@ urlpatterns = [
     path('delete/prof/<id>/', del_prof, name="del_prof"),
     path('delete/social/<id>/', del_social, name="del_social"),
     path('delete/bg/<id>/', del_bg, name="del_bg"),
+    path('setting/resume/', resumes_edit, name="resumes_edit"),
+    path('setting/educations/add', add_edu, name="add_edu"),
+    path('setting/educations/cat_del/<id>', educatdel, name="educatdel"),
+    path('setting/educations/del/<id>', edudel, name="edudel"),
+    path('setting/educations/edit/<id>', eduedit, name="eduedit"),
+    path('setting/skils/add', add_skils, name="add_skils"),
+    path('setting/skils/cat_del/<id>', skilscatdel, name="skilscatdel"),
+    path('setting/skils/del/<id>', skilsdel, name="skilsdel"),
 
 ]

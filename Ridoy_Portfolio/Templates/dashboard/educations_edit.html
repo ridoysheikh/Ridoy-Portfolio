@@ -1,0 +1,35 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block heads %}
+<link rel="stylesheet" href="{% static 'css/dashboard/educations.css' %}">
+{% endblock  %}
+{% block content %}
+
+
+
+        <div class="header_text tx-2 fs-30 w-100">
+            Edit Educations And Experience
+        </div>
+        <form action="" method="post" enctype="multipart/form-data" class="contents">
+            {% csrf_token %}
+        <lebel class="w-100 lebel">Title</lebel>
+        <input type="text" name="title" class="w-100" placeholder="Input Your Title" value="{{ edu.title }}" required>
+
+        <lebel class="w-100 lebel">Institute</lebel>
+        <input type="text" name="institute" class="w-100" placeholder="Input Your Institute Name" value="{{ edu.institute }}" required>
+        
+        
+        <lebel class="w-100 lebel">Start Year</lebel>
+        <input type="number" name="start_year" class="w-100" placeholder="Input Your Start Year" value="{{ edu.start_year }}" required>
+
+        <lebel class="w-100 lebel">End Year</lebel>
+        <input type="text" name="end_year" class="w-100" placeholder="Input Your End Year" value="{{ edu.end_year }}" required>
+
+        <lebel class="w-100 lebel">Description</lebel>
+        <textarea type="text" name="description" class="w-100" placeholder="Input Your Description" required>{{ edu.description }}</textarea>
+
+        
+        <br>
+        <button type="submit" class="btn w-100">Change</button>
+        </form>
+{% endblock  %}

@@ -242,6 +242,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 #tgl_btn{
     margin: 10px;
