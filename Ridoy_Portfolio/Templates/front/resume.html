@@ -6,86 +6,126 @@
 {% endblock  %}
 
 {% block front %}
-<!-- Main Container Start -->
-<div class="item_container rflex rcolumn">
-
-
-    <!--Education Start-->
-    <!--Section Title-->
-    <div class="res_tagline rflex rcenter">
-        <p class="tag_text">EDUCATION & EXPERTISE</p>
-    </div>
-    <!-- Main Content Of EDUCATION & EXPERICENCE start-->
-    <div class="rflex rrow edu_wrapper">
-        
-        {% for x in edu %}
-             <!--Item Containers Start-->
-        <div class="edu_container rflex rcolumn">
-            <p>{{ x.name }}</p>
-            <!-- single Item Containers Start-->
-            {% for y in x.educations_set.all %}
-            
-                <div class="items_container rflex rrow">
-                    <div class="hory_line">
-                        <span class="line-rodio material-symbols-outlined">
-                            radio_button_checked
-                        </span>
-                    </div>
-                    <div class="rcolumn">
-                        <p class="cont_title">{{ y.title }}</p>
-                        <div class="item_institute rflex rrow">
-                            <p>{{ y.institute }} | &nbsp</p>
-                            <p>{{ y.start_year }} - {{ y.end_year }}</p>
-                        </div>
-                        <p class="cont_details">{{ y.description }}</p>
-                    </div>
+<!--Content-->
+<div class="container">
+    <!--Content before waves-->
+    <div class="inner_header rflex rrow rcenter">
+        <img src="/media/{{ navs.nv_logo }}" class="resume_img" alt="">
+        <div class="about_sec rflex rcolumn">
+            <p class="about">About Me</p>
+            <p class="description">
+                {{ navs.seo_description }}
+            </p>
+           <p class="hire">I'm Available At</p>
+            <div class="rflex rrow social_link_tab">
+                {% for x in market %}
+                <div class="sc_item">
+                    <a href="{{ x.links }}" title="{{ x.name }}" target="_blank"><img class="sc_image" src="/media/{{ x.logo_img }}" alt=""></a>
                 </div>
-           
-            {% endfor %}
-             <!-- single Item Containers end-->
+                {% endfor %}
+            </div>
+            <br>
+            <div><a href="{% url 'contact' %}" class="button">Contact Me</a></div>
         </div>
-        <!--Item Containers end-->
-        {% endfor %}
     </div>
-    <!-- Main Content Of EDUCATION & EXPERICENCE end-->
-    <!--Education end-->
-
-    <!--Skill Start-->
-    <!--Section Title-->
-    <div class="res_tagline rflex rcenter">
-        <p class="tag_text">SKILLS</p>
-    </div>
-    <!-- Main Content Of EDUCATION & EXPERICENCE start-->
-    <div class="rflex rrow edu_wrapper">
     
-        <!--Item Containers Start-->
-        {% for x in skill %}
-        <div class="edu_container rflex rcolumn">
-            <p>{{ x.name }}</p>
-            <!-- single Item Containers Start-->
-            {% for y in x.skills_set.all %}
-            <div class="items_container_sk rflex rcolumn">
-                <div class="rflex rrow sk_h">
-                    <p class="sk_h_tag">{{ y.title|upper }}</p>
-                    <p class="sk_h_prog">{{ y.proggress}} %</p>
-                </div>
-                <div class="progg_bg">
-                    <div class="progg_fr" style="width: {{ y.proggress}}%;"></div>
-                </div>
+    <!--Waves Container-->
+    <div>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+    <g class="parallax">
+    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+    </g>
+    </svg>
+    </div>
+    <!--Waves end-->
+</div>
+
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="100%" height="180" xml:space="preserve">
+  <pattern id="water" width=".25" height="1.1" patternContentUnits="objectBoundingBox">
+  <path fill="#fff" d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"/>
+  </pattern>
+<g style="text-align: center;">
+<text  id="text" class="wttxt" x="115" y="150" style="font-weight:bold;font-family:helvetica">Resume</text>
+</g>
+
+<mask id="text-mask">
+    <use x="0" y="0" xlink:href="#text" opacity="1" fill="#ffffff"/>
+  </mask>	
+      <g id="eff" style="text-align: center;">
+  <use x="0" y="0" xlink:href="#text" fill="#69a8c9"/>
+  <rect class="water-fill" mask="url(#text-mask)" fill="url(#water)" x="-300" y="100" width="1200" height="120" opacity="0.3">
+  <animate attributeType="xml" attributeName="x" from="-300" to="0" repeatCount="indefinite" dur="3s"/>
+</rect>
+
+ <rect class="water-fill" mask="url(#text-mask)" fill="url(#water)" y="95" width="1600" height="120" opacity="0.3">
+  <animate attributeType="xml" attributeName="x" from="-400" to="0" repeatCount="indefinite" dur="4s"/>
+</rect>
+    
+<rect class="water-fill" mask="url(#text-mask)" fill="url(#water)" y="105" width="800" height="120" opacity="0.3">
+  <animate attributeType="xml" attributeName="x" from="-200" to="0" repeatCount="indefinite" dur="2.4s"/>
+</rect>
+
+    <rect class="water-fill" mask="url(#text-mask)" fill="url(#water)" y="105" width="2000" height="120" opacity="0.3">
+  <animate attributeType="xml" attributeName="x" from="-500" to="0" repeatCount="indefinite" dur="3.8s"/>
+</rect>
+  </g>
+
+  <use xlink:href="#eff" opacity="0.9"/>
+</svg>
+
+<div class="resume_sec rflex rcolumn">
+    
+    <div class="wrapper">
+        <div class="detail">
+        {% for x in edu %}
+          <div class="detail-section edu">
+            <div class="detail-title">
+              <span class="fs-30">{{ x.name }}</span>
+            </div>
+            {% for y in x.educations_set.all %}
+            <div class="detail-content">
+              <div class="timeline-block">
+                <h1 class="fs-25">{{ y.title }}</h1>
+                <p class="fs-20">{{ y.institute }}</p>
+                <time>{{ y.start_year }} - {{ y.end_year }}</time>
+                <p class="fs-20">{{ y.description }}</p>
+              </div>
             </div>
             {% endfor %}
-            <!-- single Item Containers end-->
+          </div>
+          {% endfor %}
+
+
+
+          {% for x in skill %}
+          <div class="detail-section pg-skill">
+            <div class="detail-title">
+              <span class="fs-30">{{ x.name }}</span>
+            </div>
+            <div class="detail-content">
+              <ul class="pg-list">
+                {% for y in x.skills_set.all %}
+                <li>
+                  <span class="fs-20">{{ y.title|upper }}</span>
+                  <div class="sb-skeleton">
+                    <div class="skillbar" style="--pgbar-length: {{ y.proggress}}%"></div>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
         </div>
         {% endfor %}
-        <!--Item Containers end-->
 
-
-    </div>
-    <!-- Main Content Of EDUCATION & EXPERICENCE end-->
-    <!--Skill end-->
-
+        </div>
 
 </div>
-<!-- Main Container end -->
-
 {% endblock  %}

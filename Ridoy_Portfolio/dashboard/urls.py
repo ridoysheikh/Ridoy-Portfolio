@@ -35,5 +35,6 @@ urlpatterns = [
     path('setting/skils/add', add_skils, name="add_skils"),
     path('setting/skils/cat_del/<id>', skilscatdel, name="skilscatdel"),
     path('setting/skils/del/<id>', skilsdel, name="skilsdel"),
+    path('delete/market/<id>/', del_mar, name="del_mar"),
 
 ]

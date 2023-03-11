@@ -48,6 +48,7 @@
         <tr>
             <th>Sl</th>
             <th>Name</th>
+            <th>Proggress</th>
             <th>Subjects</th>
             <th>Action</th>
         </tr>
@@ -57,6 +58,7 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ x.title }}</td>
+            <td>{{ x.proggress }}</td>
             <td>{{ x.catagory.name }}</td>
             <td>
                 <a href="{% url 'skilsdel' x.id %}"><span class="material-symbols-outlined" style="color: red;">

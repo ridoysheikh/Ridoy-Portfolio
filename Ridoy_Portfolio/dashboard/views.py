@@ -29,7 +29,11 @@ def dashboard(request):
 @login_required
 def site_info(request):
     if request.method == "POST":
-        navs_item = navs.objects.get(pk=1)
+        try:
+            navs_item = navs.objects.get(pk=1)
+        except:
+            navs.objects.create(id=1)
+            navs_item = navs.objects.get(pk=1)
         navs_item.nv_title=request.POST.get("title")
         navs_item.seo_title=request.POST.get("seo_title")
         navs_item.seo_description=request.POST.get("Description")
@@ -37,25 +41,42 @@ def site_info(request):
         if request.FILES.get("image"):
             navs_item.nv_logo=request.FILES.get("image")
         navs_item.save()
-    navs_item = navs.objects.get(pk=1)
+    try:
+        navs_item = navs.objects.get(pk=1)
+    except:
+        navs.objects.create(id=1)
+        navs_item = navs.objects.get(pk=1)
     return render(request, "dashboard/siteInfo.html", {'title': "Change Info's",'section':'settings','navs': navs_item})
 @login_required
 def smtp_settings(request):
     if request.method == "POST":
-        smtp_sets = smtp.objects.get(pk=1)
+        try:
+            smtp_sets = smtp.objects.get(pk=1)
+        except:
+            smtp.objects.create(id=1)
+            smtp_sets = smtp.objects.get(pk=1)
         smtp_sets.server=request.POST.get("server")
         smtp_sets.port=request.POST.get("port")
         smtp_sets.username=request.POST.get("username")
         smtp_sets.password=request.POST.get("password")
         smtp_sets.receiver_mail=request.POST.get("receiver_mail")
         smtp_sets.save()
-    smtp_sets = smtp.objects.get(pk=1)
+    try:
+        smtp_sets = smtp.objects.get(pk=1)
+    except:
+        smtp.objects.create(id=1)
+        smtp_sets = smtp.objects.get(pk=1)
     return render(request, "dashboard/smtp.html", {'title': "Change SMTP's",'section':'settings','smtp': smtp_sets})
 
 @login_required
 def contact(request):
     if request.method == "POST":
-        contact = contact_info.objects.get(pk=1)
+        
+        try:
+            contact = contact_info.objects.get(pk=1)
+        except:
+            contact_info.objects.create(id=1)
+            contact = contact_info.objects.get(pk=1)
         contact.title=request.POST.get("title")
         contact.adresses=request.POST.get("adresses")
         contact.phone=request.POST.get("phone")
@@ -63,7 +84,11 @@ def contact(request):
         contact.website=request.POST.get("website")
         
         contact.save()
-    contact = contact_info.objects.get(pk=1)
+    try:
+        contact = contact_info.objects.get(pk=1)
+    except:
+        contact_info.objects.create(id=1)
+        contact = contact_info.objects.get(pk=1)
     return render(request, "dashboard/contact.html", {'title': "Change Addresses",'section':'front','contact': contact})
 
 @login_required
@@ -78,10 +103,15 @@ def home_set(request):
         if request.POST.get("bg_mode"):
             bg_img=bg_images(bg_mode=request.POST.get("bg_mode"),bg_image=request.FILES.get("bg_image"))
             bg_img.save()
+        if request.POST.get("marname"):
+            social=market(name=request.POST.get("marname"),links=request.POST.get("marlinks"),logo_img=request.FILES.get("marlogo_img"))
+            social.save()
+        
     bg_img=bg_images.objects.all()
     social=social_id.objects.all()
     profs=profession.objects.all()
-    return render(request, "dashboard/Edit_home.html", {'title': "Change Home Pages",'section':'front','prof':profs,"sid":social,'bg_image':bg_img})
+    markets=market.objects.all()
+    return render(request, "dashboard/Edit_home.html", {'title': "Change Home Pages",'section':'front','prof':profs,"sid":social,'bg_image':bg_img,'markets':markets})
 
 @login_required
 def del_prof(request, id):
@@ -94,6 +124,12 @@ def del_social(request, id):
     social=social_id.objects.get(pk=id)
     social.delete()
     return redirect('home_set')
+
+def del_mar(request, id):
+    obj=market.objects.get(pk=id)
+    obj.delete()
+    return redirect('home_set')
+
 
 @login_required
 def del_bg(request, id):

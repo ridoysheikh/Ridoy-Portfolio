@@ -24,21 +24,39 @@ def api(request):
 
 def home(request):
     title = "Home"
-    navs_item = navs.objects.get(pk=1)
+    try:
+        navs_item = navs.objects.get(pk=1)
+    except:
+        navs.objects.create(id=1)
+        navs_item = navs.objects.get(pk=1)
     social=social_id.objects.all()
     return render(request, 'front/home.html',context={'title': title, 'navs': navs_item, 'social':social})
 
 def resumes(request):
     title = "Resume"
-    navs_item = navs.objects.get(pk=1)
+    try:
+        navs_item = navs.objects.get(pk=1)
+    except:
+        navs.objects.create(id=1)
+        navs_item = navs.objects.get(pk=1)
     edu = edu_cat.objects.all().prefetch_related(Prefetch('educations_set', queryset=educations.objects.all().order_by('-start_year')))
     skill = Skill_cat.objects.all().prefetch_related(Prefetch('skills_set', queryset=skills.objects.all()))
-    return render(request, 'front/resume.html',context={'title': title, 'navs': navs_item, 'edu':edu, 'skill': skill})
+    markets=market.objects.all()
+    return render(request, 'front/resume.html',context={'title': title, 'navs': navs_item, 'edu':edu, 'skill': skill, 'market':markets})
 
 def contact(request):
     title = "Hire Me"
-    navs_item = navs.objects.get(pk=1)
-    contacts=contact_info.objects.get(pk=1)
+    try:
+        navs_item = navs.objects.get(pk=1)
+    except:
+        navs.objects.create(id=1)
+        navs_item = navs.objects.get(pk=1)
+    try:
+        contacts = contact_info.objects.get(pk=1)
+    except:
+        contact_info.objects.create(id=1)
+        contacts=contact_info.objects.get(pk=1)
+
     if request.method == "POST":
         # get form submitions
         name = request.POST.get('name')
@@ -63,8 +81,12 @@ def contact(request):
         smtp_obj.login(smtp_username, smtp_password)
         # Send the email message
         message = f"Subject: {email_subject}\n\n{Email_body}"
-        smtp_obj.sendmail(sender_email, recipient_email, message)
-        smtp_obj.quit()
-        return render(request, 'front/contact.html',context={'title': title, 'navs': navs_item, 'contacts':contacts,'success': True})
+
+        try:
+            smtp_obj.sendmail(sender_email, recipient_email, message)
+            smtp_obj.quit()
+            return render(request, 'front/contact.html',context={'title': title, 'navs': navs_item, 'contacts':contacts,'success': True})
+        except:
+            return render(request, 'front/contact.html',context={'title': title, 'navs': navs_item, 'contacts':contacts,'fail': True})
 
     return render(request, 'front/contact.html',context={'title': title, 'navs': navs_item, 'contacts':contacts})

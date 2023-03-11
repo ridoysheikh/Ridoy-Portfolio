@@ -84,6 +84,47 @@
        </div>
 
 
+
+       <div class="card">
+        <div class="card_name">
+            Market's
+        </div>
+        <form action="" method="POST" enctype="multipart/form-data" class="form-control">
+            {% csrf_token %}
+            <input type="text" name="marname" placeholder="Enter A new Name" style="height: 40px;" required>
+            <input type="text" name="marlinks" placeholder="Enter A new Link" style="height: 40px;" required>
+            <lebel style="height: 40px;"> Choose Icon </lebel>
+            <input type="file" name="marlogo_img" style="height: 40px;" accept="image/*" required>
+            <button type="submit" class="btn">Create New</button>
+        </form>
+        <br>
+        <table cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Sl</th>
+                    <th>Name</th>
+                    <th>Icon</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for x in markets %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ x.name }}</td>
+                    <td><a href="{{ x.links }}" target="_blank"><img src="/media/{{ x.logo_img }}" height="20px" width="20px" alt=""></a></td>
+                    <td><a href="{% url 'del_mar' x.id %}"><span class="material-symbols-outlined" style="color: red;">
+                        delete
+                    </span></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   </div>
+
+
+
+
        <div class="card">
         <div class="card_name">
             Background Images

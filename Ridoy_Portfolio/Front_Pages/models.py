@@ -4,7 +4,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class navs(models.Model):
-    nv_title=models.TextField(max_length=20,null=False, blank=False)
+    nv_title=models.TextField(max_length=20,null=True, blank=False)
     nv_logo = models.ImageField(upload_to='logo/front')
     seo_title = models.TextField(max_length=200,null=True, blank=False)
     seo_description = models.TextField(max_length=500,null=True, blank=False)
@@ -62,6 +62,22 @@ class social_id(models.Model):
         self.logo_img.delete()
         # Call the superclass method
         super().delete(*args, **kwargs)
+
+class market(models.Model):
+    name=models.TextField(max_length=35,null=False, blank=False)
+    links=models.TextField(max_length=200,null=False, blank=False)
+    logo_img=models.ImageField(upload_to='social_logo/front')
+
+
+    def __str__(self):
+        return self.name
+
+    def delete(self, *args, **kwargs):
+        # Delete the image associated with the instance
+        self.logo_img.delete()
+        # Call the superclass method
+        super().delete(*args, **kwargs)
+
 class edu_cat(models.Model):
     name=models.CharField(max_length=35,null=False, blank=False)
     def __str__(self):
@@ -92,21 +108,21 @@ class skills(models.Model):
         return self.title
 
 class contact_info(models.Model):
-    title=models.CharField(max_length=100,null=False, blank=False)
-    adresses=models.CharField(max_length=100,null=False, blank=False)
-    phone=models.CharField(max_length=15,null=False, blank=False)
-    email=models.CharField(max_length=50,null=False, blank=False)
-    website=models.CharField(max_length=50,null=False, blank=False)
+    title=models.CharField(max_length=100,null=True, blank=False)
+    adresses=models.CharField(max_length=100,null=True, blank=False)
+    phone=models.CharField(max_length=15,null=True, blank=False)
+    email=models.CharField(max_length=50,null=True, blank=False)
+    website=models.CharField(max_length=50,null=True, blank=False)
 
     def __str__(self):
         return self.title
 
 class smtp(models.Model):
-    server=models.CharField(max_length=100,null=False, blank=False)
-    port=models.IntegerField(default=1,null=False, blank=False)
-    username=models.CharField(max_length=100,null=False, blank=False)
-    password=models.CharField(max_length=50,null=False, blank=False)
-    receiver_mail=models.CharField(max_length=100,null=False, blank=False)
+    server=models.CharField(max_length=100,null=True, blank=False)
+    port=models.IntegerField(default=1,null=True, blank=False)
+    username=models.CharField(max_length=100,null=True, blank=False)
+    password=models.CharField(max_length=50,null=True, blank=False)
+    receiver_mail=models.CharField(max_length=100,null=True, blank=False)
 
     def __str__(self):
         return self.username
