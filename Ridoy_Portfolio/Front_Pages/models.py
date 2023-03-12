@@ -66,7 +66,7 @@ class social_id(models.Model):
 class market(models.Model):
     name=models.TextField(max_length=35,null=False, blank=False)
     links=models.TextField(max_length=200,null=False, blank=False)
-    logo_img=models.ImageField(upload_to='social_logo/front')
+    logo_img=models.ImageField(upload_to='market/front')
 
 
     def __str__(self):
