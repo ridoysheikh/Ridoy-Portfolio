@@ -1,8 +1,12 @@
 setInterval(() => {
     if (document.readyState ==="complete") {
-        document.querySelector(".loader").style.display = "none";
+        document.querySelector(".loader").style.opacity = 0;
+        setTimeout(() => {
+            document.querySelector(".loader").style.display = "none";
+        }, 500);
     } else {
         document.querySelector(".loader").style.display = "flex";
+        document.querySelector(".loader").style.opacity = 1;
     }
 }, 100);
 let r = document.querySelector(':root');
@@ -33,7 +37,6 @@ function showMenu(e) {
             target.classList.add("active");
         }
     } else{
-        console.log(target.parentElement);
         if (target.parentElement.classList.contains("menu")) {
             if (target.parentElement.classList.contains("active")) {
                 target.parentElement.classList.remove("active");

@@ -15,9 +15,13 @@ function tooglenavs() {
 };
 setInterval(() => {
     if (document.readyState ==="complete") {
-        document.querySelector(".loader").style.display = "none";
+        document.querySelector(".loader").style.opacity = 0;
+        setTimeout(() => {
+            document.querySelector(".loader").style.display = "none";
+        }, 500);
     } else {
         document.querySelector(".loader").style.display = "flex";
+        document.querySelector(".loader").style.opacity = 1;
     }
 }, 100);
 async function typeWriter(output,timing,rtiming,element){

@@ -10,7 +10,7 @@
 </div>
 <form action="" method="post" enctype="multipart/form-data" class="contentsc">
     {% csrf_token %}
-<input type="text" name="Skillname" class="w-50" placeholder="Input Your Display Name" required>
+<input type="text" name="Skillname" class="w-50" placeholder="Input Your Catagory Name" required>
 
 <button type="submit" class="btn w-50">ADD</button>
 </form>
@@ -44,7 +44,7 @@
         <input type="text" name="title" class="w-100" placeholder="Input Your Title" required>
         
         <lebel class="w-100 lebel">Progress</lebel>
-        <input type="number" name="proggress" max="100" class="w-100" placeholder="Input Your Start Year" required>
+        <input type="number" name="proggress" max="100" class="w-100" placeholder="Input Your proggress" required>
 
         <lebel class="w-100 lebel">Catagory</lebel>
         <select name="catagory" class="w-100">

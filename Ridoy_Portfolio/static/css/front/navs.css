@@ -119,7 +119,7 @@
     z-index: 20;
     display: flex;
     opacity: 1;
-    transition: opacity .3s linear;
+    transition: opacity .5s linear;
 }
 .loader_icon{
     height: 35px;
