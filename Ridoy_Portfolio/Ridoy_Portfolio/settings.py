@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_cleanup',
     'Front_Pages',
     'dashboard',
+    'tools',
 ]
 
 MIDDLEWARE = [
