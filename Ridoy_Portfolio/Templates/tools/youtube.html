@@ -76,6 +76,14 @@
 </head>
 <body>
     <div class="cont">
+
+        <h1 class="heding">video downloader</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input name="link"type="text" placeholder="put video link" class="input">
+            <input type="submit" value="Convert" class="submit">
+        </form>
+
     {% if video %}
     <h1 class="heding">Choos your Resulation</h1>
     <div class="dnwrap">
@@ -91,12 +99,7 @@
 </div>
     {% else %}
     
-        <h1 class="heding">video downloader</h1>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input name="link"type="text" placeholder="put video link" class="input">
-            <input type="submit" value="Convert" class="submit">
-        </form>
+       
         
     {% endif %}
    
