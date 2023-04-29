@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Converter</title>
+    <style>
+        .cont{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to right, #eee9be 0%, #949cf3 100%);
+            box-sizing: border-box;
+            overflow-y: scroll;
+            padding: 10px;
+        }
+        .heding{
+            color: rgb(75, 9, 75);
+            padding: 20px;
+            font-weight: 800;
+            font-size: 40px;
+            margin: 50px 0;
+            text-decoration: none;
+        }
+    
+        .wrap{
+            min-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .btn{
+            height: 50px;
+            width: 100px;
+            border-radius: 10px;
+            background: rgb(207, 15, 15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: visible;
+            cursor: pointer;
+        }
+        .upload_box{
+            border: 2px dashed cadetblue;
+            border-radius: 10px;
+            height: 250px;
+            width: 50%;
+            min-width: 450px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        #upbox img{
+            width: 40px;
+            height: 40pxS;
+        }
+        #choos{
+            background: transparent;
+            border: 0;
+            color: blue;
+            font-size: 20px;
+        }
+        #pf {
+            display: flex;
+            flex-direction: row;
+        }
+        #pf p:nth-child(2){
+            color: rgb(23, 102, 76);
+            font-size: 15px;
+        }
+        form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #subm{
+            background: rgb(36, 230, 36);
+            border: 1px solid rgb(77, 235, 77);
+            color: rgb(21, 21, 66);
+            font-size: 20px;
+            box-shadow: 1px rgb(6, 97, 6);
+            height: 50px;
+            width: 100px;
+        }
+        ul{
+            list-style: none;
+            text-align: center;
+            color: blue;
+            width: 40%;
+            min-width: 400px;
+            background-color: rgba(172, 226, 226, 0.473);
+            position: relative;
+        }
+        ul li:nth-child(1){
+            height: 40px;
+            background-color: rgb(228, 182, 126);
+            font-size: 30px;
+            padding: 0;
+            margin: 0 0 0 -20px;
+        }
+        Ul li {
+            color: black;
+            height: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="cont">
+
+    <a href="{% url 'pdf_tool' %}" class="heding">PDF Converter</a>
+    <div class="wrap" id="wrap"> 
+        <div class="upload_box" id="upbox">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+         <img src="https://i.ibb.co/9ySCC3x/up-icon.jpg">
+        <div id="pf"> 
+        <p id="choos">upload your file</p>
+        <input type="file" name="file" id="inp" multiple hidden>
+        <p> &nbsp; Or Darg and Drop</p></div>
+
+         <input type="submit" id="subm" value="upload">
+         </form>
+        
+        </div>
+        <ul id="list">
+        </ul>
+     </div> 
+   
+    
+</div>
+</body>
+
+<script>
+    const upbox = document.getElementById("upbox");
+    const btn = document.getElementById("btn");
+    const choos = document.getElementById("choos");
+    const ipn = document.getElementById("inp");
+    let list = document.getElementById("list");
+    let inp_files
+    let item_list = ["<li>Uploaded Item</li>"];
+    setInterval(function (){
+        inp_files=inp.files;
+        for (let i = 0; i < inp_files.length; i++) {
+            let item = inp_files[i].name;
+              
+               let item_c = "<li>" + item + "</li>";
+               item_list.push(item_c);
+                list.innerHTML = item_list;
+        }
+        item_list = ["<li>Uploaded Item</li>"];
+    } , 10);
+    choos.addEventListener('click', function (){
+        inp.click();
+    });
+   
+
+// Prevent default drag behaviors
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    upbox.addEventListener(eventName, preventDefaults, false);
+  document.body.addEventListener(eventName, preventDefaults, false);
+});
+
+// Highlight drop zone when file is dragged over it
+['dragenter', 'dragover'].forEach(eventName => {
+  upbox.addEventListener(eventName, highlight, false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+  upbox.addEventListener(eventName, unhighlight, false);
+});
+
+// Handle dropped files
+upbox.addEventListener('drop', handleDrop, false);
+
+function preventDefaults(e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+function highlight(e) {
+  upbox.classList.add('highlight');
+}
+
+function unhighlight(e) {
+  upbox.classList.remove('highlight');
+}
+
+function handleDrop(e) {
+  const dt = e.dataTransfer;
+  const files = dt.files;
+  ipn.files = files;
+}
+
+    </script>
+
+{% if err %}
+<script>
+    alert("An Internal Server Error {{err}}");
+</script>
+{% endif %}
+</html>
