@@ -10,66 +10,50 @@ def you_tube(request):
         try:
             video_url = request.POST.get('link')
             ydl_opts = {
-            'quiet': True,
-            'external_downloader': 'avconv',
-            'nocheckcertificate': True,
-            'ignoreerrors': True,
-            'no_call_home': True,
-            'extractor': 'generic',
-            'extract_flat': True,
-            'verbose': True,
-            'no_color': True,
-            'no_warnings': True,
-            'outtmpl': '%(title)s.%(ext)s',
-            'format': 'bestvideo+bestaudio/best',
-            'postprocessors': [{
-                'key': 'FFmpegMetadata'
-            }, {
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-            'extractor_args': {
-                'youtube': {
-                    'skip_unavailable_fragments': True,
-                    'ignoreerrors': True,
-                    'verbose': True,
-                    'no_color': True,
-                    'no_warnings': True,
-                    'logger': None,
-                    'progress_hooks': None,
-                    'extract_flat': True,
+                'quiet': True,
+                'nocheckcertificate': True,
+                'no_call_home': True,
+                'verbose': True,
+                'no_color': True,
+                'no_warnings': True,
+                'outtmpl': '%(title)s.%(ext)s',
+                'format': 'bestvideo+bestaudio/best',
+                'extractor_args': {
+                    'youtube': {
+                        'skip_unavailable_fragments': True,
+                        'ignoreerrors': True,
+                        'verbose': True,
+                        'no_color': True,
+                        'no_warnings': True,
+                        'logger': None,
+                        'progress_hooks': None,
+                        'extract_flat': True,
+                    }
                 }
             }
-        }
-            stream_info_list = []
+
+            ydl= youtube_dl.YoutubeDL(ydl_opts)
+            video_info = ydl.extract_info(video_url, download=False)
+            
+            # Get Different Sites Vidoes Informations
             if re.match(r"https?://www\.facebook\.com/", video_url):
-                with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-                    video_info = ydl.extract_info(video_url, download=False)
-                    for stream in video_info['entries'][0]['formats']:
-                            if stream.get('protocol') == 'https':
-                                stream_info = {
-                                    "itag": stream.get('format_id'),
-                                    "resolution": stream.get('height', 'audio only'),
-                                    "size": f"{round(int(stream.get('filesize', -1))/(1024), 2)}" if stream.get('filesize') is not None else "Unknown",
-                                    "type": stream.get('ext'),
-                                    "url": stream.get('url')
-                                }
-                                stream_info_list.append(stream_info)
+                video_info=video_info['entries'][0]['formats']
 
             else:
-                with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-                    video_info = ydl.extract_info(video_url, download=False)
-                    for stream in video_info['formats']:
-                        if stream['protocol'] == 'https':
-                            stream_info = {
-                                "itag": stream['format'],
-                                "resolution": stream.get('height', 'audio only'),
-                                "size": f"{round(int(stream.get('filesize', -1))/(1024), 2)}" if stream.get('filesize') is not None else "Unknown",
-                                "type": stream['ext'],
-                                "url": stream['url']
-                                }
-                            stream_info_list.append(stream_info)
+                video_info=video_info['formats']
+
+
+            stream_info_list = []
+            for stream in video_info:
+                if stream['protocol'] == 'https':
+                    stream_info = {
+                        "itag": stream['format'],
+                        "resolution": stream.get('height', 'audio only'),
+                        "size": f"{round(int(stream.get('filesize', -1))/(1024), 2)}" if stream.get('filesize') is not None else "Unknown",
+                        "type": stream['ext'],
+                        "url": stream['url']
+                        }
+                    stream_info_list.append(stream_info)
                 
             return render(request, 'tools/youtube.html', {"link": video_url, "video": stream_info_list})
         except Exception as e:
@@ -81,27 +65,15 @@ def you_tube(request):
             itag = request.GET.get('itag')
             heit = request.GET.get('height')
 
-
             ydl_opts = {
                 'quiet': True,
-                'external_downloader': 'avconv',
                 'nocheckcertificate': True,
-                # 'ignoreerrors': True,
                 'no_call_home': True,
-                'extractor': 'generic',
-                'extract_flat': True,
                 'verbose': True,
                 'no_color': True,
                 'no_warnings': True,
                 'outtmpl': '%(title)s.%(ext)s',
                 'format': 'bestvideo+bestaudio/best',
-                'postprocessors': [{
-                    'key': 'FFmpegMetadata'
-                }, {
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'mp3',
-                    'preferredquality': '192',
-                }],
                 'extractor_args': {
                     'youtube': {
                         'skip_unavailable_fragments': True,
@@ -118,6 +90,9 @@ def you_tube(request):
 
             ydl = youtube_dl.YoutubeDL(ydl_opts)
             info_dict = ydl.extract_info(video_url, download=False)
+
+
+            # Get Different Sites Vidoes Informations
             if re.match(r"https?://www\.facebook\.com/", video_url):
                 video_url = info_dict['entries'][0]['formats']
                 for vdo in video_url:
@@ -130,6 +105,8 @@ def you_tube(request):
                     if vdo['format'] == itag:
                         video_url = vdo['url']
                 fname=info_dict["title"]
+
+            
             headers = {
                 'Accept-Encoding': 'identity',
             }

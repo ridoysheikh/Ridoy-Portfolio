@@ -23,6 +23,7 @@
             font-weight: 800;
             font-size: 40px;
             margin: 50px 0;
+            text-decoration: none;
         }
         .input{
             height: 50px;
@@ -77,7 +78,7 @@
 <body>
     <div class="cont">
 
-        <h1 class="heding">video downloader</h1>
+        <a href="{% url 'videodonloader' %}" class="heding">video downloader</a>
         <form action="" method="POST">
             {% csrf_token %}
             <input name="link"type="text" placeholder="put video link" class="input">
