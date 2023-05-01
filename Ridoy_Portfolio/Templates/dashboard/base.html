@@ -26,10 +26,10 @@
          <!--User Sections Start-->
         <div class="profile_tab rflex rcolumn">
             <div class="pro_main rflex rrow">
-                <img src="{% static 'avater.jpg' %}" alt="">
+                <img src="/media/{{ request.user.profile_pic }}" alt="">
                 <div class="pro_texts rflex rcenter rcolumn">
-                    <p>Ridoy Sheikh</p>
-                    <p>ridoysheikhh778@gmail.com</p>
+                    <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                    <p>{{ request.user.email }}</p>
                 </div>
             </div>
             <hr>

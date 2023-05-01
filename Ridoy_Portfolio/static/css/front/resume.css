@@ -253,6 +253,15 @@
     min-width: 350px;
   }
   .wttxt{
-    font-size: 100px;
+    font-size: 70px;
   }
+  
+}
+@media (max-width: 450px) {
+  .wrapper {
+    min-width: 350px;
+  }
+  .wttxt{
+    font-size: 55px;
+  
 }

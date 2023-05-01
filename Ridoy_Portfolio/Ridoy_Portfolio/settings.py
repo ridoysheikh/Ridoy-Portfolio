@@ -74,6 +74,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Ridoy_Portfolio.wsgi.application'
 
+AUTH_USER_MODEL = 'dashboard.CustomUser'
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

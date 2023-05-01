@@ -59,9 +59,6 @@ def you_tube(request):
                 
             return render(request, 'tools/youtube.html', {"link": video_url, "video": stream_info_list})
         except Exception as e:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
-            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            e=f'{exc_type}, {fname}, {exc_tb.tb_lineno}'
             return render(request,'tools/youtube.html',{"err":str(e)})
     if request.GET.get('url'):
         try:
@@ -96,7 +93,7 @@ def you_tube(request):
             ydl = youtube_dl.YoutubeDL(ydl_opts)
             info_dict = ydl.extract_info(video_url, download=False)
 
-            # Get Different Sites Vidoes Informations
+            # Get DifferentExplicabo illo Sites Vidoes Informations
             if re.match(r"https?://www\.facebook\.com/", video_url):
                 video_url = info_dict['entries'][0]['formats']
                 for vdo in video_url:
@@ -124,9 +121,9 @@ def you_tube(request):
             return response
 
         except Exception as e:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
-            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            e=f'{exc_type}, {fname}, {exc_tb.tb_lineno}'
+            # exc_type, exc_obj, exc_tb = sys.exc_info()
+            # fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            # e=f'{exc_type}, {fname}, {exc_tb.tb_lineno}'
             return HttpResponse(f"Error: {e}")
     return render(request,'tools/youtube.html',{})
 def pdf_tool(request):
@@ -136,7 +133,8 @@ def pdf_tool(request):
             pdf_file = fitz.open(stream=file.read(), filetype="pdf")
             zip_file = zipfile.ZipFile("images.zip", mode="w")  # create a new zip file in write mode
             for page in pdf_file:  # iterate through the pages
-                pix = page.get_pixmap()  # render page to an image
+                mat = fitz.Matrix(6, 6)  # zoom factor 2 in each dimension
+                pix = page.get_pixmap(matrix=mat)  # render page to an image
                 image_data = pix.tobytes()  # get the image data as bytes
                 zip_file.writestr("page-%i.png" % page.number, image_data)  # write the image data to the zip file
             zip_file.close()  # close the zip file
@@ -150,8 +148,8 @@ def pdf_tool(request):
             return response
             
         except Exception as e:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
-            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            e=f'{exc_type}, {fname}, {exc_tb.tb_lineno}'
+            # exc_type, exc_obj, exc_tb = sys.exc_info()
+            # fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            # e=f'{exc_type}, {fname}, {exc_tb.tb_lineno}'
             return render(request,'tools/pdf.html',{"err":str(e)})
     return render(request,'tools/pdf.html',{})
