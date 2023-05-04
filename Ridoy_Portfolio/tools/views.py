@@ -36,11 +36,10 @@ def you_tube(request):
 
             ydl= youtube_dl.YoutubeDL(ydl_opts)
             video_info = ydl.extract_info(video_url, download=False)
-            
-            # Get Different Sites Vidoes Informations
             if re.match(r"https?://www\.facebook\.com/", video_url):
                 video_info=video_info['entries'][0]['formats']
-
+            # elif re.match(r"https?://xhwide1\.com/", video_url):
+            #     video_info=video_info['entries'][0]['formats']
             else:
                 video_info=video_info['formats']
 
@@ -95,6 +94,12 @@ def you_tube(request):
 
             # Get DifferentExplicabo illo Sites Vidoes Informations
             if re.match(r"https?://www\.facebook\.com/", video_url):
+                video_url = info_dict['entries'][0]['formats']
+                for vdo in video_url:
+                    if vdo['format'] == itag:
+                        video_url = vdo['url']
+                    fname=f"fb-video{vdo['format']}"
+            elif re.match(r"https?://xhwide1\.com/", video_url):
                 video_url = info_dict['entries'][0]['formats']
                 for vdo in video_url:
                     if vdo['format'] == itag:
