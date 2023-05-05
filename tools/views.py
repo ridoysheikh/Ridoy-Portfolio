@@ -45,8 +45,8 @@ def you_tube(request):
 
 
             stream_info_list = []
-            for stream in video_info:
-                if stream['protocol'] == 'https':
+            for stream in video_info :
+                if stream['protocol'] == 'https' or stream['protocol'] == 'http':
                     stream_info = {
                         "itag": stream['format'],
                         "resolution": stream.get('height', 'audio only'),

@@ -94,6 +94,23 @@
         </div>
          <!--single menu end-->
 
+         <!--single menu start-->
+        <div class="menu rflex rcolumn {% if section == "settings" %}active{% endif %}" id="menu">
+            <div class="menu_head rflex rrow" onclick="showMenu(event)">
+                <p class="fs-25">Personel</p>
+                <span class="material-symbols-outlined gte">
+                arrow_forward_ios
+                </span>
+            </div>
+            <div class="menu_btns rflex rcolumn">
+                <a href="{% url 'site_info' %}">Contact</a>
+            </div>
+
+
+
+        </div>
+         <!--single menu end-->
+
 
 
 
