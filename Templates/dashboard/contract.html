@@ -1,0 +1,90 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block heads %}
+   <link rel="stylesheet" href="{% static "css/dashboard/contract.css" %}">
+{% endblock  %}
+{% block content %}
+<div class="header_text tx-2 fs-30 w-100">
+    Contacts
+</div>
+<div class="card_container">
+    {% for x in contract %}
+	<article class="cssui-usercard">
+		<div class="cssui-usercard__body">
+			<header class="cssui-usercard__header">
+				<img src="{% if x.profile_pic == "" %}
+                {% static "avater.jpg" %}
+                {% else %}
+                /media/{{ x.profile_pic }}
+                {% endif %}" class="cssui-usercard__avatar" alt="Avatar">
+				<div class="cssui-usercard__header-info">
+					<h3 class="cssui-usercard__name">{{ x.name }}</h3>
+					<span class="cssui-usercard__post">{{ x.reletion }}</span>
+                    <a href="tel:{{ x.phone_number }}" class="cssui-usercard__post">{{ x.phone_number }}</a>
+				</div>
+			</header>
+			<div class="cssui-usercard__content">
+				<div class="cssui-slider">
+						<div class="cssui-slider__slide">
+							<h4 class="cssui-usercard__title">
+								<a href="?id={{ x.id }}&method=connected" class="button">Conenected</a>
+								
+								<a href="?id={{ x.id }}&method=meeted" class="button">Meeted</a>
+								
+								<a href="?id={{ x.id }}&method=remove" class="button">Remove</a>
+							</h4>
+							<div class="cssui-usercard__stats">
+								<div class="cssui-stats cssui-usercard__stats-item">
+									<i class="cssui-icon icon-earth"></i>
+									<div class="cssui-stats__info cssui-usercard__stats-info">
+										<span class="cssui-stats__name cssui-usercard__stats-name">Address</span>
+										<span class="cssui-stats__value">{{ x.address }}</span>
+									</div>
+								</div>
+								<div class="cssui-stats cssui-usercard__stats-item">
+									<i class="cssui-icon icon-location"></i>
+									<div class="cssui-stats__info cssui-usercard__stats-info">
+										<span class="cssui-stats__name cssui-usercard__stats-name">Email</span>
+										<span class="cssui-stats__value">{{ x.email }}</span>
+                                        
+									</div>
+								</div>
+								<div class="cssui-stats cssui-usercard__stats-item">
+									<i class="cssui-icon icon-calendar"></i>
+									<div class="cssui-stats__info cssui-usercard__stats-info">
+										<span class="cssui-stats__name cssui-usercard__stats-name">Date of birth</span>
+										<span class="cssui-stats__value">{{ x.DOB }}</span>
+									</div>
+								</div>
+								<div class="cssui-stats cssui-usercard__stats-item">
+									<i class="cssui-icon icon-man-woman"></i>
+									<div class="cssui-stats__info cssui-usercard__stats-info">
+										<span class="cssui-stats__name cssui-usercard__stats-name">Last Conected</span>
+										<span class="cssui-stats__value">{{ x.last_contacted }}</span>
+									</div>
+								</div>
+                                <div class="cssui-stats cssui-usercard__stats-item">
+									<i class="cssui-icon icon-man-woman"></i>
+									<div class="cssui-stats__info cssui-usercard__stats-info">
+										<span class="cssui-stats__name cssui-usercard__stats-name">Last Meet</span>
+										<span class="cssui-stats__value">{{ x.last_meet }}</span>
+									</div>
+								</div>
+								{% if x.fb_id == "" %}
+								
+								{% else %}
+								<div class="cssui-stats cssui-usercard__stats-item">
+									<i class="cssui-icon icon-man-woman"></i>
+									<div class="cssui-stats__info cssui-usercard__stats-info" style="text-align: center;">
+										<a href="{{ x.fb_id }}" target="_blank" class="fbicon">Facebook</a>
+									</div>
+								</div>
+								{% endif %}
+							</div>
+						</div>
+	</article>
+    {% endfor %}
+
+
+</div>
+{% endblock  %}

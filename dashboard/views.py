@@ -3,6 +3,7 @@ from Front_Pages.models import *
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import datetime
 
 
 def log_in(request):
@@ -208,3 +209,27 @@ def skilsdel(request, id):
     obj=skills.objects.get(pk=id)
     obj.delete()
     return redirect('resumes_edit')
+@login_required()
+def contract(request):
+    if request.GET.get('method') == "connected":
+        id=request.GET.get('id')
+        cont=contacts.objects.get(pk=id)
+        cont.last_contacted=datetime.date.today()
+        cont.save()
+        print("c")
+    if request.GET.get('method') == "meeted":
+        id=request.GET.get('id')
+        cont=contacts.objects.get(pk=id)
+        cont.last_meet=datetime.date.today()
+        cont.save()
+        print("b")
+    if request.GET.get('method') == "remove":
+        id=request.GET.get('id')
+        cont=contacts.objects.get(pk=id)
+        print("a")
+        cont.delete()
+
+    
+    
+    cont = contacts.objects.all()
+    return render(request, "dashboard/contract.html", {'title': "View Contacts",'section':'contact','contract':cont})
