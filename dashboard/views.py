@@ -4,6 +4,7 @@ from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import datetime
+from django.http import HttpResponse
 
 
 def log_in(request):
@@ -47,7 +48,7 @@ def site_info(request):
     except:
         navs.objects.create(id=1)
         navs_item = navs.objects.get(pk=1)
-    return render(request, "dashboard/siteInfo.html", {'title': "Change Info's",'section':'settings','navs': navs_item})
+    return render(request, "dashboard/siteInfo.html", {'title': "Change Info's",'section':'siteinf','navs': navs_item})
 @login_required
 def smtp_settings(request):
     if request.method == "POST":
@@ -67,7 +68,7 @@ def smtp_settings(request):
     except:
         smtp.objects.create(id=1)
         smtp_sets = smtp.objects.get(pk=1)
-    return render(request, "dashboard/smtp.html", {'title': "Change SMTP's",'section':'settings','smtp': smtp_sets})
+    return render(request, "dashboard/smtp.html", {'title': "Change SMTP's",'section':'smtp','smtp': smtp_sets})
 
 @login_required
 def contact(request):
@@ -90,7 +91,7 @@ def contact(request):
     except:
         contact_info.objects.create(id=1)
         contact = contact_info.objects.get(pk=1)
-    return render(request, "dashboard/contact.html", {'title': "Change Addresses",'section':'front','contact': contact})
+    return render(request, "dashboard/contact.html", {'title': "Change Addresses",'section':'cont','contact': contact})
 
 @login_required
 def home_set(request):
@@ -112,7 +113,7 @@ def home_set(request):
     social=social_id.objects.all()
     profs=profession.objects.all()
     markets=market.objects.all()
-    return render(request, "dashboard/Edit_home.html", {'title': "Change Home Pages",'section':'front','prof':profs,"sid":social,'bg_image':bg_img,'markets':markets})
+    return render(request, "dashboard/Edit_home.html", {'title': "Change Home Pages",'section':'home','prof':profs,"sid":social,'bg_image':bg_img,'markets':markets})
 
 @login_required
 def del_prof(request, id):
@@ -144,7 +145,7 @@ def resumes_edit(request):
         pass
     education = educations.objects.prefetch_related('catagory')
     skils = skills.objects.prefetch_related('catagory')
-    return render(request, "dashboard/resume_d.html", {'title': "Change Resume's",'section':'front','education':education,'skils':skils})
+    return render(request, "dashboard/resume_d.html", {'title': "Change Resume's",'section':'resum','education':education,'skils':skils})
 
 @login_required
 def add_edu(request):
@@ -157,7 +158,7 @@ def add_edu(request):
             education.save()
             return redirect('resumes_edit')
     edu=edu_cat.objects.all()
-    return render(request, "dashboard/educations.html", {'title': "Add Educations",'section':'front',"edu":edu})
+    return render(request, "dashboard/educations.html", {'title': "Add Educations",'section':'resum',"edu":edu})
 
 @login_required
 def educatdel(request, id):
@@ -182,7 +183,7 @@ def eduedit(request,id):
         edu.save()
         return redirect('resumes_edit')
     edu=educations.objects.get(pk=id)
-    return render(request, "dashboard/educations_edit.html", {'title': "Edit Educations",'section':'front','edu':edu})
+    return render(request, "dashboard/educations_edit.html", {'title': "Edit Educations",'section':'resum','edu':edu})
 
 
 
@@ -197,7 +198,7 @@ def add_skils(request):
             obj.save()
             return redirect('resumes_edit')
     Skill=Skill_cat.objects.all()
-    return render(request, "dashboard/skils.html", {'title': "Add Skils",'section':'front',"Skill":Skill})
+    return render(request, "dashboard/skils.html", {'title': "Add Skils",'section':'resum',"Skill":Skill})
 
 @login_required
 def skilscatdel(request, id):
@@ -211,25 +212,40 @@ def skilsdel(request, id):
     return redirect('resumes_edit')
 @login_required()
 def contract(request):
-    if request.GET.get('method') == "connected":
-        id=request.GET.get('id')
-        cont=contacts.objects.get(pk=id)
-        cont.last_contacted=datetime.date.today()
-        cont.save()
-        print("c")
-    if request.GET.get('method') == "meeted":
-        id=request.GET.get('id')
-        cont=contacts.objects.get(pk=id)
-        cont.last_meet=datetime.date.today()
-        cont.save()
-        print("b")
-    if request.GET.get('method') == "remove":
-        id=request.GET.get('id')
-        cont=contacts.objects.get(pk=id)
-        print("a")
-        cont.delete()
+    try:
+        if request.GET.get('method') == "connected":
+            id=request.GET.get('id')
+            cont=contacts.objects.get(pk=id)
+            cont.last_contacted=datetime.date.today()
+            cont.save()
+            print("c")
+        if request.GET.get('method') == "meeted":
+            id=request.GET.get('id')
+            cont=contacts.objects.get(pk=id)
+            cont.last_meet=datetime.date.today()
+            cont.save()
+            print("b")
+        if request.GET.get('method') == "remove":
+            id=request.GET.get('id')
+            cont=contacts.objects.get(pk=id)
+            print("a")
+            cont.delete()
+        if request.POST.get('name'):
+            cont = contacts(
+            name=request.POST.get('name'),
+            address=request.POST.get('address'),
+            reletion=request.POST.get('reletion'),
+            phone_number=request.POST.get('phon_num'),
+            email=request.POST.get('email'),
+            profile_pic=request.FILES.get("file"),
+            fb_id=request.POST.get('fbid'),
+            last_meet=request.POST.get('last_meet') if request.POST.get('last_meet') else datetime.date.today(),
+            DOB=request.POST.get('dob') if request.POST.get('dob') else datetime.date.today(),
+            last_contacted=request.POST.get('last_conn') if request.POST.get('last_conn') else datetime.date.today()
+            )
+            cont.save()
+    except Exception as e:
+        HttpResponse(f"Error {e}")
 
-    
-    
     cont = contacts.objects.all()
     return render(request, "dashboard/contract.html", {'title': "View Contacts",'section':'contact','contract':cont})

@@ -54,3 +54,10 @@ function showMenu(e) {
         }
     }
 }
+let menu = document.querySelectorAll(".menu");
+for (let i = 0; i < menu.length; i++) {
+
+    if(menu[i].querySelector('.active_sub') !== null){
+        menu[i].classList.add('active')
+    }
+}

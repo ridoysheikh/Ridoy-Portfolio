@@ -51,23 +51,23 @@
         <!--Menu Group Start-->
 
         <!--single menu start-->
-        <div class="menu rflex rcolumn {% if section == "front" %}active{% endif %}" id="menu">
+        <div class="menu rflex rcolumn" id="menu">
             <div class="menu_head rflex rrow" onclick="showMenu(event)">
-                <p class="fs-25">Front</p>
+                <p class="fs-20">Front</p>
                 <span class="material-symbols-outlined gte">
                 arrow_forward_ios
                 </span>
             </div>
 
-            <div class="menu_btns rflex rcolumn">
+            <div class="menu_btns rflex rcolumn {% if section == "home" %}active_sub{% endif %}">
                 <a href="{% url 'home_set' %}">Home</a>
             </div>
 
-            <div class="menu_btns rflex rcolumn">
+            <div class="menu_btns rflex rcolumn {% if section == "resum" %}active_sub{% endif %}">
                 <a href="{% url 'resumes_edit' %}">Resumes</a>
             </div>
 
-            <div class="menu_btns rflex rcolumn">
+            <div class="menu_btns rflex rcolumn {% if section == "cont" %}active_sub{% endif %}">
                 <a href="{% url 'contact_set' %}">Addresses</a>
             </div>
 
@@ -75,18 +75,18 @@
          <!--single menu end-->
 
         <!--single menu start-->
-        <div class="menu rflex rcolumn {% if section == "settings" %}active{% endif %}" id="menu">
+        <div class="menu rflex rcolumn" id="menu">
             <div class="menu_head rflex rrow" onclick="showMenu(event)">
-                <p class="fs-25">Settings</p>
+                <p class="fs-20">Settings</p>
                 <span class="material-symbols-outlined gte">
                 arrow_forward_ios
                 </span>
             </div>
-            <div class="menu_btns rflex rcolumn">
+            <div class="menu_btns rflex rcolumn {% if section == "siteinf" %}active_sub{% endif %}">
                 <a href="{% url 'site_info' %}">Site Info</a>
             </div>
 
-            <div class="menu_btns rflex rcolumn">
+            <div class="menu_btns rflex rcolumn {% if section == "smtp" %}active_sub{% endif %}">
                 <a href="{% url 'smtp' %}">SMTP</a>
             </div>
 
@@ -95,14 +95,14 @@
          <!--single menu end-->
 
          <!--single menu start-->
-        <div class="menu rflex rcolumn {% if section == "contact" %}active{% endif %}" id="menu">
+        <div class="menu rflex rcolumn" id="menu">
             <div class="menu_head rflex rrow" onclick="showMenu(event)">
-                <p class="fs-25">Personel</p>
+                <p class="fs-20">Personel</p>
                 <span class="material-symbols-outlined gte">
                 arrow_forward_ios
                 </span>
             </div>
-            <div class="menu_btns rflex rcolumn">
+            <div class="menu_btns rflex rcolumn {% if section == "contact" %}active_sub{% endif %}">
                 <a href="{% url 'contract' %}">Contact</a>
             </div>
 

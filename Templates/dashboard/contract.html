@@ -7,6 +7,42 @@
 <div class="header_text tx-2 fs-30 w-100">
     Contacts
 </div>
+<div class="btn w-100 fs-20" onclick="window.dialog.showModal();">Add New</div>
+
+<dialog id="dialog">
+	<div class="header_text tx-2 fs-30 w-100">
+    Add New Contact
+	</div>
+	<form action="{% url 'contract' %}" method="post" enctype="multipart/form-data" class="contents">
+            {% csrf_token %}
+        <input type="text" name="name" class="w-100" placeholder="Input Contacts name" required>
+
+        
+         <input type="text" name="address" class="w-100" placeholder="Input Contacts Address" required>
+
+        <input type="text" name="reletion" class="w-100" placeholder="Input Contacts Reletion" required>
+
+ 		<input type="text" name="phon_num" class="w-100" placeholder="Input Contacts Phone Number" >
+
+		<input type="text" name="email" class="w-100" placeholder="Input Contacts Email">
+		<lebel class="w-100 lebel fs-15">Select Photo</lebel>
+		 <input type="file" name="file" accept="image/png, image/gif, image/jpeg" class="w-100" placeholder="Input Contacts Photo">
+		 <lebel class="w-100 lebel fs-15">Date Of Birth</lebel>
+		<input type="date" name="dob" class="w-100" placeholder="Date Of Birth">
+		<lebel class="w-100 lebel fs-15">Last Meet</lebel>
+		<input type="date" name="last_meet" class="w-100" placeholder="Last Meet">
+		<lebel class="w-100 lebel fs-15">Last Contacted</lebel>
+		<input type="date" name="last_conn" class="w-100" placeholder="Last Contacted">
+		<input type="text" name="fbid" class="w-100" placeholder="Facebook Id">
+
+
+        <br>
+        <button type="submit" class="btn w-100">Change</button>
+        </form>
+	<button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+</dialog>
+
+
 <div class="card_container">
     {% for x in contract %}
 	<article class="cssui-usercard">

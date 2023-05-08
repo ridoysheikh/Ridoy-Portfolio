@@ -86,6 +86,7 @@ word-break: break-all;
 text-decoration: none;
 color: inherit;
 margin-top: .2em;
+color: #000;
 }
 .cssui-usercard__stats{
 padding-right: 4%;
@@ -95,6 +96,8 @@ display: flex;
 flex-wrap: wrap;
 justify-content: flex-start;
 align-items: flex-start;
+color: #000;
+
 }
 .cssui-usercard__stats-item{
 width: 48%;
@@ -110,6 +113,7 @@ margin-top: .7rem;
 .cssui-usercard__stats-name{
 font-weight: 700;
 font-size: 1.6rem;
+color: #000;
 }
 .cssui-icon{
 width: 2em;
@@ -184,3 +188,41 @@ html{
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
+
+  /*Dialog Styles*/
+dialog {
+	padding: 1rem 3rem;
+	background: white;
+	width: 350px;
+	padding-top: 2rem;
+	border-radius: 20px;
+	border: 0;
+	box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+	animation: fadeIn 1s ease both;
+    margin: 20px;
+    }
+dialog::backdrop {
+		animation: fadeIn 1s ease both;
+		background: rgb(255 255 255 / 40%);
+		z-index: 2;
+		backdrop-filter: blur(20px);
+	}
+
+	
+	
+	
+dialog .x{
+    filter: grayscale(1);
+    border: none;
+    background: none;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    transition: ease filter, transform 0.3s;
+    cursor: pointer;
+    transform-origin: center;
+    }
+dialog .x:hover {
+        filter: grayscale(0);
+        transform: scale(1.1);
+    }
