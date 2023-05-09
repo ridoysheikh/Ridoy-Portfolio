@@ -67,7 +67,7 @@
 								
 								<a href="?id={{ x.id }}&method=meeted" class="button">Meeted</a>
 								
-								<a href="?id={{ x.id }}&method=remove" class="button">Remove</a>
+								<div class="button" onclick="edit_contact('{{ x.id }}','{{ x.name }}','{{ x.reletion }}','{{ x.phone_number }}','{{ x.address }}','{{ x.email }}','{{ x.fb_id }}')">Update</div>
 							</h4>
 							<div class="cssui-usercard__stats">
 								<div class="cssui-stats cssui-usercard__stats-item">
@@ -118,9 +118,62 @@
 								{% endif %}
 							</div>
 						</div>
+						<a href="?id={{ x.id }}&method=remove" class="cont_cls material-symbols-outlined">delete</a>
+
 	</article>
     {% endfor %}
+	
+</div>
 
+<div class="edit_tab" id="edit_tab">
+	<div class="edit_main">
+		<div class="header_text tx-2 fs-30 w-100">
+			Update Contact
+			</div>
+			<form action="{% url 'contract' %}" method="post" enctype="multipart/form-data" class="contents">
+					{% csrf_token %}
+				<input type="text" name="id" id="id" class="w-100" required hidden>
+				<input type="text" name="nname" id="name" class="w-100" placeholder="Input Contacts name" required>
+				 <input type="text" name="address" id="address" class="w-100" placeholder="Input Contacts Address" required>
+				<input type="text" name="reletion" id="reletion" class="w-100" placeholder="Input Contacts Reletion" required>
+		
+				 <input type="text" name="phon_num" id="phon_num" class="w-100" placeholder="Input Contacts Phone Number" >
+				<input type="text" name="email" id="email" class="w-100" placeholder="Input Contacts Email">
+				<lebel class="w-100 lebel fs-15">Select Photo</lebel>
+				 <input type="file" name="file" accept="image/png, image/gif, image/jpeg" class="w-100" placeholder="Input Contacts Photo">
+				 <lebel class="w-100 lebel fs-15">Date Of Birth</lebel>
+				<input type="date" name="dob" class="w-100" placeholder="Date Of Birth">
+				<input type="text" name="fbid" id="fbid" class="w-100" placeholder="Facebook Id">
+		
+				<br>
+				<button type="submit" class="btn w-100">Change</button>
+				</form>
+				<div class="cont_cls material-symbols-outlined" onclick="edit_contact()">close</div>
+	</div>
 
 </div>
+
+
+<script>
+	document.getElementById('edit_tab').style.display = 'none';
+	function edit_contact(id,name,reletion,phone_number,address,email,fbid) {
+		if (document.getElementById('edit_tab').style.display == 'none') {
+			document.getElementById('edit_tab').style.display = 'flex';
+			document.getElementById("id").value = id;
+			document.getElementById("name").value = name;
+			document.getElementById("reletion").value = reletion;
+			document.getElementById("address").value = address;
+			document.getElementById("phon_num").value = phone_number;
+			document.getElementById("email").value = email;
+			document.getElementById("fbid").value = fbid;
+
+			
+
+		}
+		else{
+			document.getElementById('edit_tab').style.display = 'none';
+		}
+		
+	}
+</script>
 {% endblock  %}

@@ -263,8 +263,8 @@ body{
     transition: opacity .3s linear;
 }
 .loader_icon{
-    height: 35px;
-    width: 35px;
+    height: 50px;
+    width: 50px;
     border: 10px solid rgb(134, 76, 192);
     border-top: 10px solid rgb(183, 203, 241);
     border-radius: 50%;

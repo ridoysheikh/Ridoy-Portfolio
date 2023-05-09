@@ -244,6 +244,21 @@ def contract(request):
             last_contacted=request.POST.get('last_conn') if request.POST.get('last_conn') else datetime.date.today()
             )
             cont.save()
+        if request.POST.get('id'):
+            cont=contacts.objects.get(pk=request.POST.get('id'))
+            cont.name=request.POST.get('nname')
+            cont.address=request.POST.get('address')
+            cont.reletion=request.POST.get('reletion')
+            cont.fb_id=request.POST.get('fbid')
+            cont.phone_number=request.POST.get('phon_num')
+            cont.email=request.POST.get('email')
+            if request.POST.get('dob'):
+                cont.DOB=request.POST.get('dob')
+            if request.FILES.get("file") !="" and request.FILES.get("file") != None and request.FILES.get("file"):
+                cont.profile_pic=request.FILES.get("file")
+            cont.save()
+
+
     except Exception as e:
         HttpResponse(f"Error {e}")
 
