@@ -53,7 +53,7 @@ width: 10rem;
 object-fit: contain;
 }
 .cssui-usercard__name{
-font-size: 3.5rem;
+font-size: 2.8rem;
 font-weight: 300;
 margin-top: 0;  
 margin-bottom: 0;  
@@ -62,7 +62,7 @@ margin-bottom: 0;
 font-weight: 700;
 }
 .cssui-usercard__post{
-font-size: 2rem;
+font-size: 1.5rem;
 display: block;
 }
 .cssui-usercard__title{

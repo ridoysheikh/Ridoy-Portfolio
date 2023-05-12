@@ -45,6 +45,9 @@ a{
 .rrow{
     flex-direction: row;
 }
+.fr{
+    flex-wrap: wrap;
+}
 .rcenter{
     justify-content: center;
     align-items: center;

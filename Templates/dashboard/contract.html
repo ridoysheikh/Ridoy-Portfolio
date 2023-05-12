@@ -7,13 +7,36 @@
 <div class="header_text tx-2 fs-30 w-100">
     Contacts
 </div>
+<div class="header_text tx-2 fs-30 w-100">
+    <form action="{% url 'contract' 1 %}" method="GET" enctype="multipart/form-data" class="contents">
+		{% csrf_token %}
+	<input type="text" name="search_query" class="w-100" placeholder="Search in Contacts" required>
+
+	<br>
+	<button type="submit" class="btn w-100">Search</button>
+	</form>
+</div>
 <div class="btn w-100 fs-20" onclick="window.dialog.showModal();">Add New</div>
+<div class="pagination rflex rrow fr">
+	{% if pages == 1 %}
+	<a class="btn w-100 fs-20">Previous</a>
+	{% else %}
+	<a href="{% url 'contract' ppage %}" class="btn w-100 fs-20">Previous</a>
+	{% endif %}
+	<input type="text" class="w-100" value="Page {{pages}} of {{mpage}}" disabled>
+	{% if pages == mpage %}
+	<a  class="btn w-100 fs-20">Next</a>
+	{% else %}
+	<a href="{% url 'contract' npage %}" class="btn w-100 fs-20">Next</a>
+	{% endif %}
+</div>
+
 
 <dialog id="dialog">
 	<div class="header_text tx-2 fs-30 w-100">
     Add New Contact
 	</div>
-	<form action="{% url 'contract' %}" method="post" enctype="multipart/form-data" class="contents">
+	<form action="{% url 'contract' pages %}" method="post" enctype="multipart/form-data" class="contents">
             {% csrf_token %}
         <input type="text" name="name" class="w-100" placeholder="Input Contacts name" required>
 
@@ -63,7 +86,7 @@
 				<div class="cssui-slider">
 						<div class="cssui-slider__slide">
 							<h4 class="cssui-usercard__title">
-								<a href="?id={{ x.id }}&method=connected" class="button">Conenected</a>
+								<a href="?id={{ x.id }}&method=connected" class="button">Contacted</a>
 								
 								<a href="?id={{ x.id }}&method=meeted" class="button">Meeted</a>
 								
@@ -95,7 +118,7 @@
 								<div class="cssui-stats cssui-usercard__stats-item">
 									<i class="cssui-icon icon-man-woman"></i>
 									<div class="cssui-stats__info cssui-usercard__stats-info">
-										<span class="cssui-stats__name cssui-usercard__stats-name">Last Conected</span>
+										<span class="cssui-stats__name cssui-usercard__stats-name">Last Contacted</span>
 										<span class="cssui-stats__value">{{ x.last_contacted }}</span>
 									</div>
 								</div>
@@ -118,7 +141,6 @@
 								{% endif %}
 							</div>
 						</div>
-						<a href="?id={{ x.id }}&method=remove" class="cont_cls material-symbols-outlined">delete</a>
 
 	</article>
     {% endfor %}
@@ -130,7 +152,7 @@
 		<div class="header_text tx-2 fs-30 w-100">
 			Update Contact
 			</div>
-			<form action="{% url 'contract' %}" method="post" enctype="multipart/form-data" class="contents">
+			<form action="{% url 'contract' pages %}" method="post" enctype="multipart/form-data" class="contents">
 					{% csrf_token %}
 				<input type="text" name="id" id="id" class="w-100" required hidden>
 				<input type="text" name="nname" id="name" class="w-100" placeholder="Input Contacts name" required>

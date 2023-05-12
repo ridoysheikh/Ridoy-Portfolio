@@ -3,8 +3,11 @@ from Front_Pages.models import *
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-import datetime
+import datetime,math
 from django.http import HttpResponse
+from django.db.models import Q
+import datetime
+from xml.etree import ElementTree as ET
 
 
 def log_in(request):
@@ -211,7 +214,7 @@ def skilsdel(request, id):
     obj.delete()
     return redirect('resumes_edit')
 @login_required()
-def contract(request):
+def contract(request, page):
     try:
         if request.GET.get('method') == "connected":
             id=request.GET.get('id')
@@ -225,11 +228,11 @@ def contract(request):
             cont.last_meet=datetime.date.today()
             cont.save()
             print("b")
-        if request.GET.get('method') == "remove":
-            id=request.GET.get('id')
-            cont=contacts.objects.get(pk=id)
-            print("a")
-            cont.delete()
+        # if request.GET.get('method') == "remove":
+        #     id=request.GET.get('id')
+        #     cont=contacts.objects.get(pk=id)
+        #     print("a")
+        #     cont.delete()
         if request.POST.get('name'):
             cont = contacts(
             name=request.POST.get('name'),
@@ -243,7 +246,9 @@ def contract(request):
             DOB=request.POST.get('dob') if request.POST.get('dob') else datetime.date.today(),
             last_contacted=request.POST.get('last_conn') if request.POST.get('last_conn') else datetime.date.today()
             )
+            request.POST=None
             cont.save()
+            return redirect("contract",page=page)
         if request.POST.get('id'):
             cont=contacts.objects.get(pk=request.POST.get('id'))
             cont.name=request.POST.get('nname')
@@ -257,10 +262,48 @@ def contract(request):
             if request.FILES.get("file") !="" and request.FILES.get("file") != None and request.FILES.get("file"):
                 cont.profile_pic=request.FILES.get("file")
             cont.save()
-
+            return redirect("contract",page=page)
 
     except Exception as e:
-        HttpResponse(f"Error {e}")
+        return HttpResponse(f"Error {e}")
+    
+    try:
+        if page:
+            page = int(page)
+        else:
+            page=1
+        start_item = (page-1)*10
+        if request.GET.get('search_query'):
+            search_query=request.GET.get('search_query')
+            cont = contacts.objects.filter(Q(name__icontains=search_query) | Q(address__icontains=search_query) | Q(reletion__icontains=search_query) | Q(phone_number__icontains=search_query) | Q(email__icontains=search_query))
+        else:
+            cont = contacts.objects.all()
+        max_page=math.floor((len(cont)-1)/10)
+        if len(cont) > start_item and len(cont) <= start_item+10:
+                cont=cont[start_item:]
+        elif len(cont) > start_item:
+                cont=cont[start_item:start_item+10]
+        elif len(cont) < start_item:
+            return HttpResponse("<h1>not result Found</h1>")
+        else:
+            cont=cont
+    except Exception as e:
+        return HttpResponse(e)
+    return render(request, "dashboard/contract.html", {'title': "View Contacts",'section':'contact','contract':cont,'pages':page,'mpage':max_page+1,'ppage':page-1,'npage':page+1})
 
-    cont = contacts.objects.all()
-    return render(request, "dashboard/contract.html", {'title': "View Contacts",'section':'contact','contract':cont})
+def get_sitemap_xml(request):
+    urls=['https://devridoy.com/',
+    'https://devridoy.com/resume/',
+    'https://devridoy.com/contact/',
+    'https://devridoy.com/video/downloader/',
+    'https://devridoy.com/pdf/'
+    ]
+    urlsetstart='<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+    urlsetend="</urlset>"
+    url=""
+    for u in urls:
+        url+= "\n<url>\n  <loc>"+str(u)+"</loc>\n<lastmod>"+str(datetime.date.today())+"</lastmod>\n<changefreq>daily</changefreq>\n<priority>1.0</priority>\n</url>"
+    
+    resp=urlsetstart+"\n"+url+"\n"+urlsetend
+    
+    return HttpResponse(resp ,content_type='text/xml')
