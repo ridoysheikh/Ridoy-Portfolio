@@ -62,7 +62,7 @@ def contact(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         messages = request.POST.get('message')
-        Email_body = f'From: {name} ({email}) \n {messages}'
+        Email_body = f'From: {name} ({email})\n\n\n {messages}'
         # Get smtp data
         smtps=smtp.objects.get(pk=1)
         # Set up the SMTP connection
@@ -70,18 +70,19 @@ def contact(request):
         smtp_port = smtps.port
         smtp_username = smtps.username
         smtp_password = smtps.password
-        sender_email = email
+        sender_email = smtps.username
         recipient_email = smtps.receiver_mail
         email_subject = f"{name} Is Messaged You"
         try:
             # Create an SMTP object
             smtp_obj = smtplib.SMTP(smtp_server, smtp_port)
             # Start the SMTP server connection
-            smtp_obj.starttls()
+            # smtp_obj.starttls()
             # Log in to the SMTP server
             smtp_obj.login(smtp_username, smtp_password)
             # Send the email message
-            message = f"Subject: {email_subject}\n\n{Email_body}"
+            message =f"From: {sender_email}\nTo: {recipient_email}\nSubject: {email_subject}\n\n{Email_body}"
+            
             smtp_obj.sendmail(sender_email, recipient_email, message)
             smtp_obj.quit()
             return render(request, 'front/contact.html',context={'title': title, 'navs': navs_item, 'contacts':contacts,'success': True})

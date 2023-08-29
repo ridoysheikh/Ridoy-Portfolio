@@ -8,6 +8,9 @@ from django.http import HttpResponse
 from django.db.models import Q
 import datetime
 from xml.etree import ElementTree as ET
+from PIL import Image
+from io import BytesIO
+from django.core.files import File
 
 
 def log_in(request):
@@ -44,7 +47,19 @@ def site_info(request):
         navs_item.seo_description=request.POST.get("Description")
         navs_item.seo_keys=request.POST.get("Tags")
         if request.FILES.get("image"):
-            navs_item.nv_logo=request.FILES.get("image")
+            uploaded_image = request.FILES.get("image")
+
+            # Resize the image
+            new_size = (200, 200)
+            image = Image.open(uploaded_image)
+            image = image.resize(new_size)
+
+            # Save the resized image to the model
+            img_io = BytesIO()
+            image.save(img_io, format='png')  # You can change the format if needed
+            navs_item.nv_logo.save(uploaded_image.name, File(img_io), save=False)
+
+
         navs_item.save()
     try:
         navs_item = navs.objects.get(pk=1)
@@ -103,14 +118,55 @@ def home_set(request):
             profs=profession(name=request.POST.get("pname"))
             profs.save()
         if request.POST.get("links"):
-            social=social_id(name=request.POST.get("name"),links=request.POST.get("links"),logo_img=request.FILES.get("logo_img"))
-            social.save()
+            if request.FILES.get("logo_img"):
+                social=social_id(name=request.POST.get("name"),links=request.POST.get("links"))
+                uploaded_image = request.FILES.get("logo_img")
+                # Resize the image
+                new_size = (50, 50)
+                image = Image.open(uploaded_image)
+                image = image.resize(new_size)
+
+                # Save the resized image to the model
+                img_io = BytesIO()
+                image.save(img_io, format='png')  # You can change the format if needed
+                social.logo_img.save(uploaded_image.name, File(img_io), save=False)
+                social.save()
+            else:
+                social=social_id(name=request.POST.get("name"),links=request.POST.get("links"))
+                social.save()
         if request.POST.get("bg_mode"):
-            bg_img=bg_images(bg_mode=request.POST.get("bg_mode"),bg_image=request.FILES.get("bg_image"))
+            bg_img=bg_images(bg_mode=request.POST.get("bg_mode"))
+            uploaded_image = request.FILES.get("bg_image")
+            # Resize the image
+            if request.POST.get("bg_mode") == "Portrait":
+                new_size = (480, 800)
+            else:
+                new_size = (1024, 768)
+            
+            image = Image.open(uploaded_image)
+            image = image.resize(new_size)
+            # Save the resized image to the model
+            img_io = BytesIO()
+            image.save(img_io, format='png')  # You can change the format if needed
+            bg_img.bg_image.save(uploaded_image.name, File(img_io), save=False)
+            
             bg_img.save()
         if request.POST.get("marname"):
-            social=market(name=request.POST.get("marname"),links=request.POST.get("marlinks"),logo_img=request.FILES.get("marlogo_img"))
-            social.save()
+            if request.FILES.get("marlogo_img"):
+                social=market(name=request.POST.get("marname"),links=request.POST.get("marlinks"))
+                uploaded_image = request.FILES.get("marlogo_img")
+                # Resize the image
+                new_size = (50, 50)
+                image = Image.open(uploaded_image)
+                image = image.resize(new_size)
+                # Save the resized image to the model
+                img_io = BytesIO()
+                image.save(img_io, format='png')  # You can change the format if needed
+                social.logo_img.save(uploaded_image.name, File(img_io), save=False)
+                social.save()
+            else:
+                social=market(name=request.POST.get("marname"),links=request.POST.get("marlinks"))
+                social.save()
         
     bg_img=bg_images.objects.all()
     social=social_id.objects.all()
@@ -302,8 +358,9 @@ def get_sitemap_xml(request):
     urlsetend="</urlset>"
     url=""
     for u in urls:
-        url+= "\n<url>\n  <loc>"+str(u)+"</loc>\n<lastmod>"+str(datetime.date.today())+"</lastmod>\n<changefreq>daily</changefreq>\n<priority>1.0</priority>\n</url>"
+        url+= "\n<url>\n  <loc>"+str(u)+"</loc>\n<lastmod>"+str(datetime.date.today())+"</lastmod>\n<changefreq>always</changefreq>\n<priority>1.0</priority>\n</url>"
     
     resp=urlsetstart+"\n"+url+"\n"+urlsetend
     
     return HttpResponse(resp ,content_type='text/xml')
+
