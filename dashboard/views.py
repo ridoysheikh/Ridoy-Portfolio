@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.db.models import Q
 import datetime
 from xml.etree import ElementTree as ET
-from PIL import Image
+from PIL import Image, ExifTags
 from io import BytesIO
 from django.core.files import File
 
@@ -111,6 +111,25 @@ def contact(request):
         contact = contact_info.objects.get(pk=1)
     return render(request, "dashboard/contact.html", {'title': "Change Addresses",'section':'cont','contact': contact})
 
+def fix_image_orientation(image):
+    try:
+        for orientation in ExifTags.TAGS.keys():
+            if ExifTags.TAGS[orientation] == 'Orientation':
+                break
+        exif = dict(image._getexif().items())
+
+        if exif[orientation] == 3:
+            image = image.rotate(180, expand=True)
+        elif exif[orientation] == 6:
+            image = image.rotate(270, expand=True)
+        elif exif[orientation] == 8:
+            image = image.rotate(90, expand=True)
+
+    except (AttributeError, KeyError, IndexError):
+        # No EXIF data found or the image doesn't need rotation
+        pass
+
+    return image
 @login_required
 def home_set(request):
     if request.method == "POST":
@@ -138,12 +157,14 @@ def home_set(request):
             bg_img=bg_images(bg_mode=request.POST.get("bg_mode"))
             uploaded_image = request.FILES.get("bg_image")
             # Resize the image
+
             if request.POST.get("bg_mode") == "Portrait":
-                new_size = (480, 800)
+                new_size = (480, 798)
             else:
                 new_size = (1024, 768)
             
             image = Image.open(uploaded_image)
+            image = fix_image_orientation(image)
             image = image.resize(new_size)
             # Save the resized image to the model
             img_io = BytesIO()
